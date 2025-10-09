@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import AdminLayout from '../../components/admin/AdminLayout';
 import { getGallery, createGalleryItem, deleteGalleryItem, uploadFile } from '../../services/supabase';
 
 const ManageGallery = () => {
@@ -114,165 +115,166 @@ const ManageGallery = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading gallery...</p>
+      <AdminLayout title="Manage Gallery">
+        <div className="flex items-center justify-center h-64">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
+            <p className="mt-4 text-gray-600">Loading gallery...</p>
+          </div>
         </div>
-      </div>
+      </AdminLayout>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-6">
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900">Manage Gallery</h1>
-            <p className="text-gray-600 mt-2">Upload and organize school photos</p>
-          </div>
-          <button
-            onClick={() => setShowForm(!showForm)}
-            className="bg-primary-600 text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition-colors"
-          >
-            {showForm ? 'Cancel' : 'Add New Image'}
-          </button>
-        </div>
+    <AdminLayout title="Manage Gallery">
+      {/* Page Header */}
+      <div className="flex justify-between items-center mb-6">
+        <p className="text-gray-600">Upload and organize school photos</p>
+        <button
+          onClick={() => setShowForm(!showForm)}
+          className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors shadow-sm hover:shadow-md flex items-center gap-2"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          {showForm ? 'Cancel' : 'Add New Image'}
+        </button>
+      </div>
 
-        {/* Upload Form */}
-        {showForm && (
-          <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-            <h2 className="text-xl font-semibold mb-6">Add New Image</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Upload Image
-                  </label>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileSelect}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  />
-                  <p className="text-sm text-gray-500 mt-1">
-                    Or provide an image URL below. Max file size: 5MB
-                  </p>
-                </div>
-                
-                <div className="text-center text-gray-500">
-                  <span>OR</span>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Image URL
-                  </label>
-                  <input
-                    type="url"
-                    value={formData.image_url}
-                    onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    placeholder="https://example.com/image.jpg"
-                    disabled={selectedFile}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Caption (optional)
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.caption}
-                    onChange={(e) => setFormData({ ...formData, caption: e.target.value })}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    placeholder="Enter image caption"
-                  />
-                </div>
+      {/* Upload Form */}
+      {showForm && (
+        <div className="bg-white rounded-lg shadow-md p-6 mb-8 border border-gray-200">
+          <h2 className="text-xl font-semibold mb-6">Add New Image</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Upload Image
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileSelect}
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                />
+                <p className="text-sm text-gray-500 mt-1">
+                  Or provide an image URL below. Max file size: 5MB
+                </p>
               </div>
               
-              <div className="flex gap-4 mt-6">
-                <button
-                  type="submit"
-                  disabled={uploading || (!selectedFile && !formData.image_url)}
-                  className="bg-primary-600 text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
-                >
-                  {uploading ? 'Uploading...' : 'Add Image'}
-                </button>
-                <button
-                  type="button"
-                  onClick={cancelForm}
-                  className="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors"
-                >
-                  Cancel
-                </button>
+              <div className="text-center text-gray-500">
+                <span>OR</span>
               </div>
-            </form>
-          </div>
-        )}
 
-        {/* Gallery Grid */}
-        <div className="bg-white rounded-lg shadow-md">
-          <div className="p-6 border-b border-gray-200">
-            <h2 className="text-xl font-semibold">Gallery Images ({galleryItems.length})</h2>
-          </div>
-          
-          {galleryItems.length === 0 ? (
-            <div className="p-8 text-center text-gray-500">
-              <div className="text-4xl mb-4">🖼️</div>
-              <p className="text-lg font-medium">No images in gallery</p>
-              <p className="text-sm mt-2">Upload your first image to get started!</p>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Image URL
+                </label>
+                <input
+                  type="url"
+                  value={formData.image_url}
+                  onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  placeholder="https://example.com/image.jpg"
+                  disabled={selectedFile}
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Caption (optional)
+                </label>
+                <input
+                  type="text"
+                  value={formData.caption}
+                  onChange={(e) => setFormData({ ...formData, caption: e.target.value })}
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  placeholder="Enter image caption"
+                />
+              </div>
             </div>
-          ) : (
-            <div className="p-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {galleryItems.map((item) => (
-                  <div key={item.id} className="group relative bg-gray-100 rounded-lg overflow-hidden">
-                    <div className="aspect-square">
-                      <img
-                        src={item.image_url}
-                        alt={item.caption || 'Gallery image'}
-                        className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                        onError={(e) => {
-                          e.target.src = '/api/placeholder/300/300';
-                        }}
-                      />
-                    </div>
-                    
-                    {/* Overlay with controls */}
-                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-200 flex items-center justify-center">
-                      <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button
-                          onClick={() => handleDelete(item.id, item.image_url)}
-                          className="bg-red-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-red-700 transition-colors"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                    
-                    {/* Caption */}
-                    {item.caption && (
-                      <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-75 text-white p-2">
-                        <p className="text-sm truncate">{item.caption}</p>
-                      </div>
-                    )}
-                    
-                    {/* Upload info */}
-                    <div className="absolute top-2 right-2">
-                      <span className="bg-black bg-opacity-75 text-white text-xs px-2 py-1 rounded">
-                        {new Date(item.created_at).toLocaleDateString()}
-                      </span>
+            
+            <div className="flex gap-4 mt-6">
+              <button
+                type="submit"
+                disabled={uploading || (!selectedFile && !formData.image_url)}
+                className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+              >
+                {uploading ? 'Uploading...' : 'Add Image'}
+              </button>
+              <button
+                type="button"
+                onClick={cancelForm}
+                className="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {/* Gallery Grid */}
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+        <div className="p-6 border-b border-gray-200">
+          <h2 className="text-xl font-semibold">Gallery Images ({galleryItems.length})</h2>
+        </div>
+        
+        {galleryItems.length === 0 ? (
+          <div className="p-8 text-center text-gray-500">
+            <div className="text-4xl mb-4">🖼️</div>
+            <p className="text-lg font-medium">No images in gallery</p>
+            <p className="text-sm mt-2">Upload your first image to get started!</p>
+          </div>
+        ) : (
+          <div className="p-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {galleryItems.map((item) => (
+                <div key={item.id} className="group relative bg-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                  <div className="aspect-square">
+                    <img
+                      src={item.image_url}
+                      alt={item.caption || 'Gallery image'}
+                      className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                      onError={(e) => {
+                        e.target.src = '/api/placeholder/300/300';
+                      }}
+                    />
+                  </div>
+                  
+                  {/* Overlay with controls */}
+                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-200 flex items-center justify-center">
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                      <button
+                        onClick={() => handleDelete(item.id, item.image_url)}
+                        className="bg-red-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-red-700 transition-colors"
+                      >
+                        Delete
+                      </button>
                     </div>
                   </div>
-                ))}
-              </div>
+                  
+                  {/* Caption */}
+                  {item.caption && (
+                    <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-75 text-white p-2">
+                      <p className="text-sm truncate">{item.caption}</p>
+                    </div>
+                  )}
+                  
+                  {/* Upload info */}
+                  <div className="absolute top-2 right-2">
+                    <span className="bg-black bg-opacity-75 text-white text-xs px-2 py-1 rounded">
+                      {new Date(item.created_at).toLocaleDateString()}
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
-    </div>
+    </AdminLayout>
   );
 };
 
