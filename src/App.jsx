@@ -1,0 +1,59 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import Layout from './components/layout/Layout';
+
+// Public Pages
+import Home from './pages/public/Home';
+import About from './pages/public/About';
+import Academics from './pages/public/Academics';
+import Achievements from './pages/public/Achievements';
+import Gallery from './pages/public/Gallery';
+import Events from './pages/public/Events';
+import Contact from './pages/public/Contact';
+import Login from './pages/public/Login';
+
+// Admin Pages
+import Dashboard from './pages/admin/Dashboard';
+import ManagePosts from './pages/admin/ManagePosts';
+import ManageEvents from './pages/admin/ManageEvents';
+import ManageGallery from './pages/admin/ManageGallery';
+
+// Components
+import ProtectedRoute from './components/ui/ProtectedRoute';
+
+import './App.css';
+
+function App() {
+  return (
+    <AuthProvider>
+      <Router>
+        <div className="App">
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="about" element={<About />} />
+              <Route path="academics" element={<Academics />} />
+              <Route path="achievements" element={<Achievements />} />
+              <Route path="gallery" element={<Gallery />} />
+              <Route path="events" element={<Events />} />
+              <Route path="contact" element={<Contact />} />
+              <Route path="login" element={<Login />} />
+              
+              {/* Protected Admin Routes */}
+              <Route path="admin" element={<ProtectedRoute />}>
+                <Route index element={<Dashboard />} />
+                <Route path="posts" element={<ManagePosts />} />
+                <Route path="events" element={<ManageEvents />} />
+                <Route path="gallery" element={<ManageGallery />} />
+              </Route>
+            </Route>
+          </Routes>
+        </div>
+      </Router>
+    </AuthProvider>
+  );
+}
+
+export default App;
