@@ -39,16 +39,16 @@ function App() {
               <Route path="gallery" element={<Gallery />} />
               <Route path="events" element={<Events />} />
               <Route path="contact" element={<Contact />} />
-              <Route path="login" element={<Login />} />
-              
-              {/* Protected Admin Routes */}
-              <Route path="admin" element={<ProtectedRoute />}>
-                <Route index element={<Dashboard />} />
-                <Route path="posts" element={<ManagePosts />} />
-                <Route path="events" element={<ManageEvents />} />
-                <Route path="gallery" element={<ManageGallery />} />
-              </Route>
             </Route>
+            
+            {/* Login Route (no layout) */}
+            <Route path="login" element={<Login />} />
+            
+            {/* Protected Admin Routes (separate from public layout) */}
+            <Route path="admin" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path="admin/posts" element={<ProtectedRoute><ManagePosts /></ProtectedRoute>} />
+            <Route path="admin/events" element={<ProtectedRoute><ManageEvents /></ProtectedRoute>} />
+            <Route path="admin/gallery" element={<ProtectedRoute><ManageGallery /></ProtectedRoute>} />
           </Routes>
         </div>
       </Router>
