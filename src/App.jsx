@@ -8,8 +8,8 @@ import Home from './pages/public/Home';
 import About from './pages/public/About';
 import Academics from './pages/public/Academics';
 import Achievements from './pages/public/Achievements';
-import Gallery from './pages/public/GallerySimple';
-import Events from './pages/public/EventsSimple';
+import Gallery from './pages/public/Gallery';
+import Events from './pages/public/Events';
 import Contact from './pages/public/Contact';
 import Login from './pages/public/Login';
 
@@ -46,10 +46,10 @@ function App() {
             <Route path="login" element={<Login />} />
             
             {/* Protected Admin Routes (separate from public layout) */}
-            <Route path="admin" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="admin/posts" element={<ProtectedRoute><ManagePosts /></ProtectedRoute>} />
-            <Route path="admin/events" element={<ProtectedRoute><ManageEvents /></ProtectedRoute>} />
-            <Route path="admin/gallery" element={<ProtectedRoute><ManageGallery /></ProtectedRoute>} />
+            <Route path="admin" element={<ProtectedRoute><ErrorBoundary showDetails={true}><Dashboard /></ErrorBoundary></ProtectedRoute>} />
+            <Route path="admin/posts" element={<ProtectedRoute><ErrorBoundary showDetails={true}><ManagePosts /></ErrorBoundary></ProtectedRoute>} />
+            <Route path="admin/events" element={<ProtectedRoute><ErrorBoundary showDetails={true}><ManageEvents /></ErrorBoundary></ProtectedRoute>} />
+            <Route path="admin/gallery" element={<ProtectedRoute><ErrorBoundary showDetails={true}><ManageGallery /></ErrorBoundary></ProtectedRoute>} />
           </Routes>
         </div>
       </Router>

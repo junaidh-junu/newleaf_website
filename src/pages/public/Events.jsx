@@ -123,8 +123,8 @@ const Events = () => {
       (filter === 'past' && !isUpcoming(event.date)) ||
       (filter !== 'all' && filter !== 'upcoming' && filter !== 'past' && event.category === filter);
     
-    const matchesSearch = event.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         event.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = (event.name?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
+                         (event.description?.toLowerCase() || '').includes(searchTerm.toLowerCase());
     
     return matchesFilter && matchesSearch;
   });
