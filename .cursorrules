@@ -1,0 +1,510 @@
+# Project Context
+
+This is a React + Vite + Supabase project. Follow these guidelines for all code generation, refactoring, and commit messages.
+
+---
+
+## Commit Message Guidelines
+
+### Format
+
+Always use gitmoji + conventional commits format:
+<gitmoji> <type>(<scope>): <subject>
+[optional body]
+[optional footer]
+
+### Gitmoji Reference
+
+- ✨ :sparkles: - New features
+- 🐛 :bug: - Bug fixes
+- 🚑 :ambulance: - Critical hotfix
+- 📝 :memo: - Documentation updates
+- 🎨 :art: - Code structure/format improvements
+- ⚡️ :zap: - Performance improvements
+- 🔥 :fire: - Remove code or files
+- 🚀 :rocket: - Deployment related
+- 💄 :lipstick: - UI/styling updates
+- ♻️ :recycle: - Refactoring
+- ✅ :white_check_mark: - Add/update tests
+- 🔒 :lock: - Security fixes
+- 🔐 :closed_lock_with_key: - Add/update secrets
+- ⬆️ :arrow_up: - Upgrade dependencies
+- ⬇️ :arrow_down: - Downgrade dependencies
+- 🔧 :wrench: - Configuration files
+- 🌐 :globe_with_meridians: - Internationalization/localization
+- 💚 :green_heart: - Fix CI build
+- 👷 :construction_worker: - CI/CD changes
+- 📦 :package: - Package/build changes
+- 🗃️ :card_file_box: - Database changes
+- 🔀 :twisted_rightwards_arrows: - Merge branches
+- ⏪ :rewind: - Revert changes
+- 🚧 :construction: - Work in progress
+- 💡 :bulb: - Add/update comments
+- 🍱 :bento: - Add/update assets
+- ♿️ :wheelchair: - Accessibility improvements
+- 🏗️ :building_construction: - Architectural changes
+- 📱 :iphone: - Responsive design work
+
+### Type Reference
+
+- **feat**: New feature
+- **fix**: Bug fix
+- **docs**: Documentation only
+- **style**: Code style (formatting, semicolons, etc)
+- **refactor**: Code change that neither fixes bug nor adds feature
+- **perf**: Performance improvement
+- **test**: Adding or updating tests
+- **build**: Build system or dependencies
+- **ci**: CI configuration files and scripts
+- **chore**: Other changes that don't modify src or test files
+- **revert**: Revert previous commit
+
+### Scope Examples
+
+- **auth**: Authentication related
+- **supabase**: Supabase integration
+- **db**: Database/schema changes
+- **api**: API calls/integration
+- **ui**: User interface components
+- **hooks**: React hooks
+- **routes**: Routing
+- **state**: State management
+- **forms**: Form handling
+- **config**: Configuration
+- **deps**: Dependencies
+
+### Commit Examples
+
+✨ feat(auth): implement email verification flow
+🐛 fix(supabase): resolve real-time subscription memory leak
+📝 docs(readme): add setup instructions for Supabase
+🎨 refactor(hooks): extract common useSupabase logic
+⚡️ perf(api): optimize data fetching with React Query
+🔒 fix(auth): prevent unauthorized access to protected routes
+🗃️ feat(db): add user profiles table migration
+💄 style(ui): update button components with Tailwind
+♻️ refactor(forms): migrate to React Hook Form
+✅ test(auth): add unit tests for login flow
+
+---
+
+## Code Style & Architecture
+
+### React Component Guidelines
+
+1. **Component Structure**
+
+   - Use functional components with hooks
+   - Prefer named exports for components
+   - Keep components small and focused (single responsibility)
+   - Co-locate related files (Component.jsx, Component.module.css, Component.test.jsx)
+
+2. **Component Organization**
+   src/
+   ├── components/
+   │ ├── ui/ # Reusable UI components
+   │ ├── features/ # Feature-specific components
+   │ └── layouts/ # Layout components
+   ├── hooks/ # Custom hooks
+   ├── lib/ # Utilities and configurations
+   ├── pages/ # Page components
+   ├── services/ # API/Supabase services
+   ├── stores/ # State management
+   ├── types/ # TypeScript types
+   └── utils/ # Helper functions
+
+3. **Naming Conventions**
+   - Components: PascalCase (e.g., `UserProfile.jsx`)
+   - Hooks: camelCase with 'use' prefix (e.g., `useAuth.js`)
+   - Utilities: camelCase (e.g., `formatDate.js`)
+   - Constants: UPPER_SNAKE_CASE (e.g., `API_BASE_URL`)
+   - Supabase tables: snake_case (e.g., `user_profiles`)
+
+### React Best Practices
+
+1. **Hooks**
+
+   - Always declare hooks at the top level
+   - Use `useMemo` and `useCallback` for expensive operations
+   - Create custom hooks for reusable logic
+   - Prefer `useEffect` cleanup functions
+
+2. **State Management**
+
+   - Use local state for component-specific data
+   - Use Context API for global app state
+   - Consider Zustand/Jotai for complex state
+   - Keep Supabase as single source of truth
+
+3. **Props**
+
+   - Destructure props in function parameters
+   - Use PropTypes or TypeScript for type checking
+   - Keep prop drilling to max 2-3 levels
+   - Use composition over prop drilling
+
+4. **Performance**
+   - Lazy load routes with React.lazy()
+   - Implement code splitting for large components
+   - Use React.memo for expensive renders
+   - Optimize images (use Vite's asset handling)
+   - Implement pagination/infinite scroll for lists
+
+---
+
+## Supabase Integration
+
+### Client Setup
+
+```javascript
+// lib/supabase.js
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+  },
+})
+Authentication Patterns
+
+Auth Hook Structure
+
+javascript   // hooks/useAuth.js
+   export function useAuth() {
+     const [user, setUser] = useState(null)
+     const [loading, setLoading] = useState(true)
+
+     useEffect(() => {
+       // Get initial session
+       supabase.auth.getSession().then(({ data: { session } }) => {
+         setUser(session?.user ?? null)
+         setLoading(false)
+       })
+
+       // Listen for auth changes
+       const { data: { subscription } } = supabase.auth.onAuthStateChange(
+         (_event, session) => {
+           setUser(session?.user ?? null)
+         }
+       )
+
+       return () => subscription.unsubscribe()
+     }, [])
+
+     return { user, loading }
+   }
+
+Protected Routes
+
+Always wrap protected routes with auth checks
+Redirect to login if not authenticated
+Show loading state during auth check
+
+
+Error Handling
+
+Always handle Supabase errors gracefully
+Use try-catch for async operations
+Show user-friendly error messages
+Log errors for debugging
+
+
+
+Database Operations
+
+Query Patterns
+
+javascript   // ✅ Good - with error handling
+   const { data, error } = await supabase
+     .from('posts')
+     .select('*, author:profiles(*)')
+     .eq('status', 'published')
+     .order('created_at', { ascending: false })
+
+   if (error) throw error
+   return data
+
+   // ❌ Avoid - no error handling
+   const { data } = await supabase.from('posts').select('*')
+
+Real-time Subscriptions
+
+Always unsubscribe in cleanup
+Use specific channels for targeted updates
+Handle connection errors
+Implement reconnection logic
+
+
+RLS (Row Level Security)
+
+Always enable RLS on tables
+Create policies for SELECT, INSERT, UPDATE, DELETE
+Test policies thoroughly
+Document policy logic
+
+
+
+Storage
+
+File Upload Pattern
+
+javascript   const uploadFile = async (file, bucket, path) => {
+     const { data, error } = await supabase.storage
+       .from(bucket)
+       .upload(path, file, {
+         cacheControl: '3600',
+         upsert: false
+       })
+
+     if (error) throw error
+
+     const { data: { publicUrl } } = supabase.storage
+       .from(bucket)
+       .getPublicUrl(path)
+
+     return publicUrl
+   }
+
+Best Practices
+
+Validate file types and sizes client-side
+Use unique file names (uuid + timestamp)
+Set appropriate bucket policies
+Implement progress indicators
+Handle upload failures gracefully
+
+
+
+
+Vite Configuration
+Environment Variables
+bash# .env.local
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_anon_key
+
+Always prefix with VITE_ for client-side access
+Never commit sensitive keys
+Use different keys for dev/staging/prod
+Access via import.meta.env.VITE_*
+
+Build Optimization
+
+Enable build compression
+Configure chunk splitting for better caching
+Use asset inlining for small files
+Implement lazy loading for routes
+Configure proper base path for deployment
+
+
+Error Handling
+Standard Error Pattern
+javascripttry {
+  const { data, error } = await supabaseOperation()
+  if (error) throw error
+  return data
+} catch (error) {
+  console.error('Operation failed:', error.message)
+  // Show user-friendly message
+  toast.error('Something went wrong. Please try again.')
+  // Optional: Send to error tracking service
+  throw error
+}
+Form Validation
+
+Validate on client before submission
+Show inline field errors
+Disable submit during processing
+Handle Supabase constraint errors
+Provide clear error messages
+
+
+Testing Guidelines
+
+Unit Tests
+
+Test custom hooks with @testing-library/react-hooks
+Test utility functions
+Test component logic
+
+
+Integration Tests
+
+Test Supabase integration with mock data
+Test auth flows
+Test form submissions
+
+
+E2E Tests
+
+Test critical user flows
+Test with real Supabase test database
+Use Playwright or Cypress
+
+
+
+
+Security Best Practices
+
+Authentication
+
+Never store sensitive data in localStorage without encryption
+Use httpOnly cookies when possible
+Implement CSRF protection
+Use secure password requirements
+Implement rate limiting on auth endpoints
+
+
+Data Validation
+
+Validate all user inputs
+Sanitize data before display
+Use parameterized queries (Supabase does this)
+Implement proper RLS policies
+
+
+API Keys
+
+Never expose service_role key in client
+Use anon key for client-side operations
+Rotate keys periodically
+Use environment-specific keys
+
+
+
+
+Accessibility (a11y)
+
+Use semantic HTML elements
+Provide alt text for images
+Ensure keyboard navigation works
+Maintain proper heading hierarchy
+Use ARIA labels where necessary
+Test with screen readers
+Ensure sufficient color contrast
+Support reduced motion preferences
+
+
+Performance Optimization
+
+React Optimization
+
+Use React.memo for expensive components
+Implement virtualization for long lists
+Debounce search/filter inputs
+Use pagination instead of loading all data
+
+
+Supabase Optimization
+
+Select only needed columns
+Use proper indexes on queried columns
+Implement cursor-based pagination
+Cache frequently accessed data
+Use count queries efficiently
+
+
+Asset Optimization
+
+Compress images before upload
+Use WebP format when possible
+Implement lazy loading for images
+Use Vite's asset optimization
+
+
+
+
+Code Review Checklist
+Before committing, ensure:
+
+ Code follows project conventions
+ No console.logs in production code
+ Error handling implemented
+ Loading states handled
+ TypeScript/PropTypes added
+ Responsive design tested
+ Accessibility checked
+ Performance optimized
+ Security considerations addressed
+ Tests added/updated
+ Documentation updated
+ Commit message follows format
+
+
+Common Patterns to Follow
+Data Fetching Hook
+javascriptfunction useQuery(queryFn, dependencies = []) {
+  const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    let isMounted = true
+
+    const fetchData = async () => {
+      try {
+        setLoading(true)
+        const result = await queryFn()
+        if (isMounted) {
+          setData(result)
+          setError(null)
+        }
+      } catch (err) {
+        if (isMounted) {
+          setError(err)
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false)
+        }
+      }
+    }
+
+    fetchData()
+
+    return () => { isMounted = false }
+  }, dependencies)
+
+  return { data, loading, error }
+}
+Form Submission Pattern
+javascriptconst handleSubmit = async (e) => {
+  e.preventDefault()
+  setLoading(true)
+  setError(null)
+
+  try {
+    const { data, error } = await supabase
+      .from('table')
+      .insert(formData)
+
+    if (error) throw error
+
+    toast.success('Success!')
+    navigate('/success-page')
+  } catch (err) {
+    setError(err.message)
+    toast.error('Failed to submit')
+  } finally {
+    setLoading(false)
+  }
+}
+
+AI Code Generation Preferences
+When generating code:
+
+Always include proper error handling
+Add loading and error states for async operations
+Include TypeScript types or PropTypes
+Follow the file structure conventions
+Add comments for complex logic
+Consider accessibility in UI components
+Implement responsive design by default
+Use modern ES6+ syntax
+Prefer functional programming patterns
+Include proper cleanup in useEffect hooks
+
+```
