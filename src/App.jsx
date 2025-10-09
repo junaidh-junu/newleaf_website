@@ -8,8 +8,8 @@ import Home from './pages/public/Home';
 import About from './pages/public/About';
 import Academics from './pages/public/Academics';
 import Achievements from './pages/public/Achievements';
-import Gallery from './pages/public/Gallery';
-import Events from './pages/public/Events';
+import Gallery from './pages/public/GallerySimple';
+import Events from './pages/public/EventsSimple';
 import Contact from './pages/public/Contact';
 import Login from './pages/public/Login';
 
@@ -21,6 +21,7 @@ import ManageGallery from './pages/admin/ManageGallery';
 
 // Components
 import ProtectedRoute from './components/ui/ProtectedRoute';
+import ErrorBoundary from './components/ErrorBoundary';
 
 import './App.css';
 
@@ -36,8 +37,8 @@ function App() {
               <Route path="about" element={<About />} />
               <Route path="academics" element={<Academics />} />
               <Route path="achievements" element={<Achievements />} />
-              <Route path="gallery" element={<Gallery />} />
-              <Route path="events" element={<Events />} />
+              <Route path="gallery" element={<ErrorBoundary showDetails={true}><Gallery /></ErrorBoundary>} />
+              <Route path="events" element={<ErrorBoundary showDetails={true}><Events /></ErrorBoundary>} />
               <Route path="contact" element={<Contact />} />
             </Route>
             

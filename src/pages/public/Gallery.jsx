@@ -8,6 +8,7 @@ const Gallery = () => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     loadGallery();
@@ -15,10 +16,15 @@ const Gallery = () => {
 
   const loadGallery = async () => {
     try {
+      console.log('Loading gallery data...');
       const data = await getGallery();
+      console.log('Gallery data loaded:', data);
       setGalleryItems(data || []);
     } catch (error) {
       console.error('Error loading gallery:', error);
+      // Use sample data if database fails
+      setGalleryItems([]);
+      setError(`Failed to load gallery: ${error.message}`);
     } finally {
       setLoading(false);
     }
@@ -129,7 +135,8 @@ const Gallery = () => {
 
   const filteredItems = displayItems.filter(item => {
     const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
-    const matchesSearch = item.caption.toLowerCase().includes(searchTerm.toLowerCase());
+    const itemText = item.caption || item.description || item.title || '';
+    const matchesSearch = itemText.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
@@ -186,8 +193,27 @@ const Gallery = () => {
     );
   }
 
-  return (
-    <div className="min-h-screen bg-gray-50">
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center max-w-md mx-auto p-6">
+          <div className="text-red-500 text-6xl mb-4">⚠️</div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Gallery Error</h2>
+          <p className="text-gray-600 mb-4">{error}</p>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors"
+          >
+            Reload Page
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  try {
+    return (
+      <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-pink-500 to-rose-600 text-white py-20">
         <div className="absolute inset-0 bg-black opacity-20"></div>
@@ -346,13 +372,17 @@ const Gallery = () => {
           <div className="max-w-4xl max-h-full flex flex-col items-center justify-center">
             <img 
               src={filteredItems[currentImageIndex]?.image_url} 
-              alt={filteredItems[currentImageIndex]?.caption}
+              alt={filteredItems[currentImageIndex]?.caption || filteredItems[currentImageIndex]?.title || filteredItems[currentImageIndex]?.description}
               className="max-w-full max-h-[70vh] object-contain"
             />
             
             {/* Image Info */}
             <div className="mt-6 text-center max-w-2xl">
-              <p className="text-white text-lg mb-2">{filteredItems[currentImageIndex]?.caption}</p>
+              <p className="text-white text-lg mb-2">
+                {filteredItems[currentImageIndex]?.caption || 
+                 filteredItems[currentImageIndex]?.title || 
+                 filteredItems[currentImageIndex]?.description}
+              </p>
               <div className="flex items-center justify-center space-x-4 text-gray-300 text-sm">
                 <span>
                   {categories.find(cat => cat.id === filteredItems[currentImageIndex]?.category)?.icon} 
@@ -441,8 +471,32 @@ const Gallery = () => {
           </div>
         </div>
       </section>
-    </div>
-  );
+      </div>
+    );
+  } catch (renderError) {
+    console.error('Gallery render error:', renderError);
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center max-w-md mx-auto p-6">
+          <div className="text-red-500 text-6xl mb-4">🐞</div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Oops! Something went wrong</h2>
+          <p className="text-gray-600 mb-4">We're having trouble loading the gallery. Please try refreshing the page.</p>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors mr-2"
+          >
+            Reload Page
+          </button>
+          <a 
+            href="/" 
+            className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors"
+          >
+            Go Home
+          </a>
+        </div>
+      </div>
+    );
+  }
 };
 
 export default Gallery;

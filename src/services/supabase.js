@@ -57,7 +57,7 @@ export const getEvents = async () => {
   const { data, error } = await supabase
     .from('events')
     .select('*')
-    .order('date', { ascending: true });
+    .order('event_date', { ascending: true });
   
   if (error) throw error;
   return data;
