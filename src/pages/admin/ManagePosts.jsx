@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import AdminLayout from '../../components/admin/AdminLayout';
-import { getPosts, createPost, updatePost, deletePost } from '../../services/supabase';
+import { getPosts, createPost, updatePost, deletePost, uploadFile } from '../../services/supabase';
 
 const ManagePosts = () => {
   const { user } = useAuth();
@@ -14,6 +14,8 @@ const ManagePosts = () => {
     description: '',
     image_url: ''
   });
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     loadPosts();
@@ -30,27 +32,65 @@ const ManagePosts = () => {
     }
   };
 
+  const handleFileSelect = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        alert('Please select an image file.');
+        return;
+      }
+      // Validate file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        alert('File size must be less than 5MB.');
+        return;
+      }
+      setSelectedFile(file);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setUploading(true);
+    
     try {
+      let imageUrl = formData.image_url;
+      
+      // If a file is selected, upload it first
+      if (selectedFile) {
+        const fileName = `posts/${Date.now()}-${selectedFile.name.replace(/\s+/g, '-')}`;
+        try {
+          imageUrl = await uploadFile('school-media', selectedFile, fileName);
+        } catch (uploadError) {
+          console.error('Upload error:', uploadError);
+          alert('Failed to upload image. You can add the image URL manually instead.');
+          setUploading(false);
+          return;
+        }
+      }
+      
       const postData = {
         ...formData,
+        image_url: imageUrl,
         author_email: user.email
       };
 
       if (editingPost) {
-        await updatePost(editingPost.id, formData);
+        await updatePost(editingPost.id, { ...formData, image_url: imageUrl });
       } else {
         await createPost(postData);
       }
 
       setFormData({ title: '', description: '', image_url: '' });
+      setSelectedFile(null);
       setShowForm(false);
       setEditingPost(null);
       loadPosts();
     } catch (error) {
       console.error('Error saving post:', error);
       alert('Error saving post. Please try again.');
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -61,6 +101,7 @@ const ManagePosts = () => {
       description: post.description,
       image_url: post.image_url || ''
     });
+    setSelectedFile(null);
     setShowForm(true);
   };
 
@@ -78,6 +119,7 @@ const ManagePosts = () => {
 
   const cancelEdit = () => {
     setFormData({ title: '', description: '', image_url: '' });
+    setSelectedFile(null);
     setShowForm(false);
     setEditingPost(null);
   };
@@ -147,6 +189,25 @@ const ManagePosts = () => {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Upload Image
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileSelect}
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                />
+                <p className="text-sm text-gray-500 mt-1">
+                  Or provide an image URL below. Max file size: 5MB
+                </p>
+              </div>
+              
+              <div className="text-center text-gray-500">
+                <span>OR</span>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Image URL (optional)
                 </label>
                 <input
@@ -155,15 +216,17 @@ const ManagePosts = () => {
                   onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
                   className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   placeholder="https://example.com/image.jpg"
+                  disabled={selectedFile}
                 />
               </div>
             </div>
             <div className="flex gap-4 mt-6">
               <button
                 type="submit"
-                className="bg-primary-600 text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition-colors"
+                disabled={uploading}
+                className="bg-primary-600 text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
-                {editingPost ? 'Update Post' : 'Create Post'}
+                {uploading ? 'Saving...' : (editingPost ? 'Update Post' : 'Create Post')}
               </button>
               <button
                 type="button"

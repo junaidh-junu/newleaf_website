@@ -83,22 +83,22 @@ const Header = () => {
                   </svg>
                 </button>
                 <div className="absolute right-0 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 pointer-events-none group-hover:pointer-events-auto z-50">
-                  <div className="w-56 glass-panel p-2 shadow-floating animate-slide-down">
+                  <div className="w-56 bg-white/95 backdrop-blur-xl border border-gray-200/80 rounded-2xl shadow-xl p-2 animate-slide-down">
                     <div className="space-y-1">
                       {adminNavItems.map((item, index) => (
                         <Link
                           key={item.path}
                           to={item.path}
-                          className="flex items-center space-x-3 px-4 py-3 text-neutral-700 hover:text-primary-600 hover:bg-white/20 rounded-xl transition-all duration-200 group/item"
+                          className="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50/80 rounded-xl transition-all duration-200 group/item"
                         >
                           <div className="w-2 h-2 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full opacity-0 group-hover/item:opacity-100 transition-opacity duration-200"></div>
                           <span className="font-medium">{item.name}</span>
                         </Link>
                       ))}
-                      <div className="border-t border-white/20 my-2"></div>
+                      <div className="border-t border-gray-200 my-2"></div>
                       <button
                         onClick={handleLogout}
-                        className="flex items-center space-x-3 w-full px-4 py-3 text-red-500 hover:text-red-600 hover:bg-red-50/50 rounded-xl transition-all duration-200 group/item"
+                        className="flex items-center space-x-3 w-full px-4 py-3 text-red-600 hover:text-red-700 hover:bg-red-50/80 rounded-xl transition-all duration-200 group/item"
                       >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -137,13 +137,13 @@ const Header = () => {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden mt-6 animate-slide-down">
-            <div className="glass-panel p-4 mx-2 shadow-floating">
+            <div className="bg-white/95 backdrop-blur-xl border border-gray-200/80 rounded-2xl shadow-xl p-4 mx-2">
               <div className="space-y-2">
                 {publicNavItems.map((item, index) => (
                   <Link
                     key={item.path}
                     to={item.path}
-                    className="flex items-center space-x-3 px-4 py-3 text-neutral-700 hover:text-primary-600 hover:bg-white/20 rounded-xl transition-all duration-200 group animate-slide-in-left"
+                    className="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50/80 rounded-xl transition-all duration-200 group animate-slide-in-left"
                     style={{ animationDelay: `${index * 50}ms` }}
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -154,13 +154,13 @@ const Header = () => {
                 
                 {user ? (
                   <div className="pt-4">
-                    <div className="border-t border-white/20 mb-4"></div>
+                    <div className="border-t border-gray-200 mb-4"></div>
                     <div className="space-y-2">
                       {adminNavItems.map((item, index) => (
                         <Link
                           key={item.path}
                           to={item.path}
-                          className="flex items-center space-x-3 px-4 py-3 text-neutral-700 hover:text-primary-600 hover:bg-white/20 rounded-xl transition-all duration-200 group"
+                          className="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50/80 rounded-xl transition-all duration-200 group"
                           onClick={() => setIsMenuOpen(false)}
                         >
                           <svg className="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -174,7 +174,7 @@ const Header = () => {
                           handleLogout();
                           setIsMenuOpen(false);
                         }}
-                        className="flex items-center space-x-3 w-full px-4 py-3 text-red-500 hover:text-red-600 hover:bg-red-50/50 rounded-xl transition-all duration-200 group"
+                        className="flex items-center space-x-3 w-full px-4 py-3 text-red-600 hover:text-red-700 hover:bg-red-50/80 rounded-xl transition-all duration-200 group"
                       >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -185,7 +185,7 @@ const Header = () => {
                   </div>
                 ) : (
                   <div className="pt-4">
-                    <div className="border-t border-white/20 mb-4"></div>
+                    <div className="border-t border-gray-200 mb-4"></div>
                     <Link
                       to="/login"
                       className="flex items-center justify-center space-x-2 w-full px-4 py-3 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-2xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-neon active:scale-95"

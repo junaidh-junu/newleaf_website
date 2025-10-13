@@ -114,6 +114,17 @@ export const createGalleryItem = async (item) => {
   return data[0];
 };
 
+export const updateGalleryItem = async (id, updates) => {
+  const { data, error } = await supabase
+    .from('gallery')
+    .update(updates)
+    .eq('id', id)
+    .select();
+  
+  if (error) throw error;
+  return data[0];
+};
+
 export const deleteGalleryItem = async (id) => {
   const { error } = await supabase
     .from('gallery')

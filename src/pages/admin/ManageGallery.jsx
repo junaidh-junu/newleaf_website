@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import AdminLayout from '../../components/admin/AdminLayout';
-import { getGallery, createGalleryItem, deleteGalleryItem, uploadFile } from '../../services/supabase';
+import { getGallery, createGalleryItem, updateGalleryItem, deleteGalleryItem, uploadFile } from '../../services/supabase';
 
 const ManageGallery = () => {
   const { user } = useAuth();
@@ -9,6 +9,7 @@ const ManageGallery = () => {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [editingItem, setEditingItem] = useState(null);
   const [formData, setFormData] = useState({
     caption: '',
     image_url: ''
@@ -79,10 +80,15 @@ const ManageGallery = () => {
         uploaded_by: user.email
       };
 
-      await createGalleryItem(galleryData);
+      if (editingItem) {
+        await updateGalleryItem(editingItem.id, { caption: formData.caption, image_url: imageUrl });
+      } else {
+        await createGalleryItem(galleryData);
+      }
       
       setFormData({ caption: '', image_url: '' });
       setSelectedFile(null);
+      setEditingItem(null);
       setShowForm(false);
       loadGallery();
     } catch (error) {
@@ -110,6 +116,7 @@ const ManageGallery = () => {
   const cancelForm = () => {
     setFormData({ caption: '', image_url: '' });
     setSelectedFile(null);
+    setEditingItem(null);
     setShowForm(false);
   };
 
@@ -145,7 +152,9 @@ const ManageGallery = () => {
       {/* Upload Form */}
       {showForm && (
         <div className="bg-white rounded-lg shadow-md p-6 mb-8 border border-gray-200">
-          <h2 className="text-xl font-semibold mb-6">Add New Image</h2>
+          <h2 className="text-xl font-semibold mb-6">
+            {editingItem ? 'Edit Image' : 'Add New Image'}
+          </h2>
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 gap-6">
               <div>
@@ -198,10 +207,10 @@ const ManageGallery = () => {
             <div className="flex gap-4 mt-6">
               <button
                 type="submit"
-                disabled={uploading || (!selectedFile && !formData.image_url)}
+                disabled={uploading || (!selectedFile && !formData.image_url && !editingItem)}
                 className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
-                {uploading ? 'Uploading...' : 'Add Image'}
+                {uploading ? 'Uploading...' : (editingItem ? 'Update Image' : 'Add Image')}
               </button>
               <button
                 type="button"
@@ -245,7 +254,13 @@ const ManageGallery = () => {
                   
                   {/* Overlay with controls */}
                   <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-200 flex items-center justify-center">
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
+                      <button
+                        onClick={() => handleEdit(item)}
+                        className="bg-blue-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-blue-700 transition-colors"
+                      >
+                        Edit
+                      </button>
                       <button
                         onClick={() => handleDelete(item.id, item.image_url)}
                         className="bg-red-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-red-700 transition-colors"

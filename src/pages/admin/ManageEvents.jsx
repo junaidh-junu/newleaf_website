@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import AdminLayout from '../../components/admin/AdminLayout';
-import { getEvents, createEvent, updateEvent, deleteEvent } from '../../services/supabase';
+import { getEvents, createEvent, updateEvent, deleteEvent, uploadFile } from '../../services/supabase';
 
 const ManageEvents = () => {
   const { user } = useAuth();
@@ -15,6 +15,8 @@ const ManageEvents = () => {
     description: '',
     image_url: ''
   });
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     loadEvents();
@@ -31,22 +33,64 @@ const ManageEvents = () => {
     }
   };
 
+  const handleFileSelect = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        alert('Please select an image file.');
+        return;
+      }
+      // Validate file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        alert('File size must be less than 5MB.');
+        return;
+      }
+      setSelectedFile(file);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setUploading(true);
+    
     try {
+      let imageUrl = formData.image_url;
+      
+      // If a file is selected, upload it first
+      if (selectedFile) {
+        const fileName = `events/${Date.now()}-${selectedFile.name.replace(/\s+/g, '-')}`;
+        try {
+          imageUrl = await uploadFile('school-media', selectedFile, fileName);
+        } catch (uploadError) {
+          console.error('Upload error:', uploadError);
+          alert('Failed to upload image. You can add the image URL manually instead.');
+          setUploading(false);
+          return;
+        }
+      }
+      
+      const eventData = {
+        ...formData,
+        image_url: imageUrl
+      };
+      
       if (editingEvent) {
-        await updateEvent(editingEvent.id, formData);
+        await updateEvent(editingEvent.id, eventData);
       } else {
-        await createEvent(formData);
+        await createEvent(eventData);
       }
 
       setFormData({ name: '', date: '', description: '', image_url: '' });
+      setSelectedFile(null);
       setShowForm(false);
       setEditingEvent(null);
       loadEvents();
     } catch (error) {
       console.error('Error saving event:', error);
       alert('Error saving event. Please try again.');
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -58,6 +102,7 @@ const ManageEvents = () => {
       description: event.description,
       image_url: event.image_url || ''
     });
+    setSelectedFile(null);
     setShowForm(true);
   };
 
@@ -75,6 +120,7 @@ const ManageEvents = () => {
 
   const cancelEdit = () => {
     setFormData({ name: '', date: '', description: '', image_url: '' });
+    setSelectedFile(null);
     setShowForm(false);
     setEditingEvent(null);
   };
@@ -168,6 +214,25 @@ const ManageEvents = () => {
               </div>
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Upload Image
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileSelect}
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                />
+                <p className="text-sm text-gray-500 mt-1">
+                  Or provide an image URL below. Max file size: 5MB
+                </p>
+              </div>
+              
+              <div className="md:col-span-2 text-center text-gray-500">
+                <span>OR</span>
+              </div>
+
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Image URL (optional)
                 </label>
                 <input
@@ -176,15 +241,17 @@ const ManageEvents = () => {
                   onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
                   className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   placeholder="https://example.com/image.jpg"
+                  disabled={selectedFile}
                 />
               </div>
             </div>
             <div className="flex gap-4 mt-6">
               <button
                 type="submit"
-                className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                disabled={uploading}
+                className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
-                {editingEvent ? 'Update Event' : 'Create Event'}
+                {uploading ? 'Saving...' : (editingEvent ? 'Update Event' : 'Create Event')}
               </button>
               <button
                 type="button"
