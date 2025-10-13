@@ -71,112 +71,174 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-mesh">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 bg-grid opacity-30"></div>
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-primary-400/20 to-accent-400/20 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-br from-accent-400/20 to-primary-400/20 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-br from-primary-300/10 to-accent-300/10 rounded-full blur-2xl animate-float" style={{animationDelay: '4s'}}></div>
-        {/* Add Heavens preschool colors for variety */}
-        <div className="absolute top-3/4 left-1/6 w-72 h-72 bg-gradient-to-br from-orange-400/15 to-blue-400/15 rounded-full blur-3xl animate-float" style={{animationDelay: '1s'}}></div>
-        <div className="absolute top-1/6 right-1/6 w-56 h-56 bg-gradient-to-br from-pink-400/10 to-green-400/10 rounded-full blur-2xl animate-float" style={{animationDelay: '3s'}}></div>
+      <section className="relative h-screen overflow-hidden">
+        {/* Hero Image Background */}
+        <div className="absolute inset-0">
+          <div className="w-full h-full bg-gradient-to-r from-primary-900/90 to-primary-800/70 relative">
+            {/* Placeholder for school building image - you can replace this with an actual image */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary-600 to-primary-800 opacity-90"></div>
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNCIvPjwvZz48L2c+PC9zdmc+')] opacity-30"></div>
+          </div>
+        </div>
         
-        <div className="container mx-auto px-6 text-center relative z-10">
-          <div className="max-w-5xl mx-auto">
-            {/* Floating Logo/Icon */}
-            <div className="mb-8 flex justify-center">
-              <div className="relative group">
-                <div className="w-24 h-24 bg-gradient-to-br from-primary-500 to-accent-500 rounded-3xl flex items-center justify-center shadow-glow animate-glow-pulse floating-element">
-                  <svg className="w-14 h-14 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
-                </div>
-                <div className="absolute -inset-2 bg-gradient-to-br from-primary-500 to-accent-500 rounded-3xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
-              </div>
-            </div>
-            
-            <div className="animate-fade-in">
-              <h1 className="text-6xl md:text-8xl font-black mb-8 tracking-tight">
-                <span className="block gradient-text">
-                  Welcome to
-                </span>
-                <span className="block gradient-text mt-2">
-                  New Leaf School
-                </span>
+        {/* Hero Content */}
+        <div className="relative z-10 h-full flex items-center">
+          <div className="container mx-auto px-6">
+            <div className="max-w-4xl mx-auto text-center text-white">
+              <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight">
+                NEW LEAF SCHOOL
               </h1>
-              
-              <p className="text-xl md:text-2xl mb-12 max-w-4xl mx-auto leading-relaxed text-neutral-600 font-light">
-                Nurturing young minds for a <span className="gradient-text font-semibold">brighter future</span> through quality education, 
-                innovative teaching methods, and holistic development.
+              <p className="text-xl md:text-2xl font-light mb-4 opacity-90">
+                & HEAVENS PRESCHOOL
+              </p>
+              <p className="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto leading-relaxed">
+                Excellence in Education - Nurturing young minds for a brighter future through quality education, innovative teaching methods, and holistic development.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   to="/about"
-                  className="btn-primary group relative overflow-hidden px-10 py-4 text-lg"
+                  className="bg-white text-primary-700 px-8 py-4 rounded-lg font-semibold hover:bg-primary-50 transition-colors duration-300 inline-flex items-center justify-center"
                 >
-                  <span className="relative z-10 flex items-center space-x-2">
-                    <span>Discover Our Story</span>
-                    <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </span>
+                  <span>Learn More About Us</span>
+                  <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
                 </Link>
                 
                 <Link
                   to="/contact"
-                  className="btn-secondary group px-10 py-4 text-lg"
+                  className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-primary-700 transition-all duration-300 inline-flex items-center justify-center"
                 >
-                  <span className="flex items-center space-x-2">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                    </svg>
-                    <span>Get In Touch</span>
-                  </span>
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  <span>Contact Us</span>
                 </Link>
               </div>
-              
-              {/* Scroll Indicator */}
-              <div className="mt-16 flex justify-center animate-bounce">
-                <div className="w-6 h-10 border-2 border-primary-400 rounded-full flex justify-center">
-                  <div className="w-1 h-3 bg-primary-400 rounded-full mt-2 animate-pulse"></div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </div>
+      </section>
+
+      {/* Mission, Vision, Objectives Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Our Mission */}
+            <div className="text-center p-8 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow duration-300">
+              <div className="flex justify-center mb-6">
+                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center">
+                  <svg className="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
                 </div>
               </div>
+              <h3 className="text-2xl font-bold mb-4 text-neutral-800">Our Mission</h3>
+              <p className="text-neutral-600 leading-relaxed">
+                To provide comprehensive quality education with excellent student learning opportunities and an environment of learning and development that motivates students to achieve their full potential.
+              </p>
+            </div>
+
+            {/* Our Vision */}
+            <div className="text-center p-8 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow duration-300">
+              <div className="flex justify-center mb-6">
+                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center">
+                  <svg className="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                </div>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-neutral-800">Our Vision</h3>
+              <p className="text-neutral-600 leading-relaxed">
+                To become the premier institution providing high quality education to nurture responsible and competitive global citizens equipped with strong moral values and innovative thinking.
+              </p>
+            </div>
+
+            {/* Our Objective */}
+            <div className="text-center p-8 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow duration-300">
+              <div className="flex justify-center mb-6">
+                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center">
+                  <svg className="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                  </svg>
+                </div>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-neutral-800">Our Objective</h3>
+              <p className="text-neutral-600 leading-relaxed">
+                To create a positive learning environment that enables each student to discover and develop their talents, building character and confidence for future success.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-20 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary-50/30 to-transparent"></div>
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="card group text-center transform hover:scale-105 transition-all duration-300">
-              <div className="relative mb-4">
-                <div className="text-5xl font-black gradient-text mb-2 animate-scale-in">{stats.totalPosts}</div>
-                <div className="absolute -inset-2 bg-gradient-to-r from-primary-400/20 to-accent-400/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      {/* About School Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* School Image */}
+            <div className="order-2 lg:order-1">
+              <div className="relative">
+                <div className="bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl p-8 text-white">
+                  {/* Placeholder for school image - you can replace this with an actual image */}
+                  <div className="aspect-video bg-white/10 rounded-lg flex items-center justify-center">
+                    <div className="text-center">
+                      <svg className="w-16 h-16 mx-auto mb-4 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                      </svg>
+                      <p className="text-sm opacity-80">New Leaf School Building</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-accent-200 rounded-2xl opacity-60 -z-10"></div>
+                <div className="absolute -top-4 -left-4 w-32 h-32 bg-primary-200 rounded-3xl opacity-40 -z-10"></div>
               </div>
-              <div className="text-neutral-600 font-medium tracking-wide">Latest Announcements</div>
-              <div className="mt-4 w-full h-1 bg-gradient-to-r from-primary-400 to-accent-400 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
             </div>
             
-            <div className="card group text-center transform hover:scale-105 transition-all duration-300">
-              <div className="relative mb-4">
-                <div className="text-5xl font-black gradient-text mb-2 animate-scale-in">{stats.upcomingEventsCount}</div>
-                <div className="absolute -inset-2 bg-gradient-to-r from-accent-400/20 to-primary-400/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            {/* School Description */}
+            <div className="order-1 lg:order-2">
+              <div className="mb-6">
+                <h2 className="text-4xl font-bold mb-4 text-neutral-800">NEW LEAF SCHOOL & HEAVENS PRESCHOOL</h2>
               </div>
-              <div className="text-neutral-600 font-medium tracking-wide">Upcoming Events</div>
-              <div className="mt-4 w-full h-1 bg-gradient-to-r from-accent-400 to-primary-400 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-            </div>
-            
-            <div className="card group text-center transform hover:scale-105 transition-all duration-300">
-              <div className="relative mb-4">
-                <div className="text-5xl font-black gradient-text mb-2 animate-scale-in">15+</div>
-                <div className="absolute -inset-2 bg-gradient-to-r from-primary-400/20 to-accent-400/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              <div className="space-y-6 text-neutral-600 leading-relaxed">
+                <p>
+                  New Leaf School stands as one of the leading educational institutions in our region, dedicated to providing exceptional learning experiences for students from preschool through higher grades. Our commitment to excellence has made us a trusted choice for parents seeking quality education.
+                </p>
+                
+                <p>
+                  With over <span className="font-semibold text-primary-600">15 years of experience</span>, we have been consistently providing high-quality education that combines traditional values with modern teaching methodologies. Our experienced faculty is dedicated to nurturing each student's individual talents and capabilities.
+                </p>
+                
+                <p>
+                  We believe in holistic development and provide numerous opportunities for students to excel not only academically but also in sports, arts, and various extracurricular activities. Our modern facilities and comprehensive curriculum ensure that students receive a well-rounded education.
+                </p>
+                
+                <p>
+                  At New Leaf School & Heavens Preschool, we focus on building strong foundations for lifelong learning, preparing our students to become responsible global citizens and future leaders in their chosen fields.
+                </p>
               </div>
-              <div className="text-neutral-600 font-medium tracking-wide">Years of Excellence</div>
-              <div className="mt-4 w-full h-1 bg-gradient-to-r from-primary-400 to-accent-400 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+              
+              <div className="mt-8">
+                <Link
+                  to="/about"
+                  className="inline-flex items-center px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-300 font-semibold"
+                >
+                  <span>Learn More About Us</span>
+                  <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -251,6 +313,80 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Our Infrastructure Section */}
+      <section className="py-20 bg-gray-100">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4 text-neutral-800">OUR INFRASTRUCTURE</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Modern facilities designed to provide the best learning environment for our students.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Computer Lab */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div className="h-48 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold mb-2 text-neutral-800">Computer Lab</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  State-of-the-art computer laboratory equipped with modern systems and high-speed internet connectivity for digital learning.
+                </p>
+              </div>
+            </div>
+
+            {/* Science Lab */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div className="h-48 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                </svg>
+              </div>
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold mb-2 text-neutral-800">Science Lab</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Fully equipped science laboratories with modern apparatus and safety equipment for hands-on learning experiences.
+                </p>
+              </div>
+            </div>
+
+            {/* Library */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div className="h-48 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              </div>
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold mb-2 text-neutral-800">Library</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Comprehensive library with thousands of books, digital resources, and quiet study spaces for research and learning.
+                </p>
+              </div>
+            </div>
+
+            {/* Transportation */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div className="h-48 bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center">
+                <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                </svg>
+              </div>
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-bold mb-2 text-neutral-800">Transportation</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Safe and reliable school transportation service covering wide areas with experienced drivers and route supervisors.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Schools Showcase */}
       <SchoolsShowcase />
 
@@ -314,11 +450,11 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Latest Updates Section */}
-      <section className="py-16 bg-gray-50">
+      {/* News and Events Section */}
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Latest Updates</h2>
+            <h2 className="text-4xl font-bold mb-4 text-neutral-800">NEWS AND EVENTS</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Stay informed with the latest news, announcements, and upcoming events from New Leaf School.
             </p>

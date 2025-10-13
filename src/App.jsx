@@ -22,6 +22,7 @@ import ManageGallery from './pages/admin/ManageGallery';
 // Components
 import ProtectedRoute from './components/ui/ProtectedRoute';
 import ErrorBoundary from './components/ErrorBoundary';
+import ScrollToTop from './components/ui/ScrollToTop';
 
 import './App.css';
 
@@ -29,6 +30,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
+        <ScrollToTop />
         <div className="App">
           <Routes>
             {/* Public Routes */}
