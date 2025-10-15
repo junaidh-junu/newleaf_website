@@ -53,6 +53,7 @@ The application follows a standard React SPA pattern with protected admin routes
 - **Authentication**: Supabase Auth with email/password, managed via AuthContext
 - **Data Layer**: Supabase PostgreSQL with helper functions in services layer
 - **Storage**: Supabase Storage for file uploads (bucket: `school-media`)
+- **Static Assets**: School logos and branding stored in `public/images/newleaf/`
 
 ### Key Components
 - `AuthProvider` (context/AuthContext.jsx) - Manages authentication state across the app
@@ -84,6 +85,29 @@ Row Level Security (RLS) is enabled with policies allowing public read access an
 - Storage bucket `school-media` for file uploads
 - CORS configured for the deployment domain
 
+## Assets and Branding
+
+### School Logos
+School logos are stored in `public/images/newleaf/` directory:
+- `new leaf logos-01.png/jpg` - Primary logo variant 1
+- `new leaf logos-02.png/jpg` - Primary logo variant 2  
+- `new leaf logos-03.png/jpg` - Logo variant 3
+- `new leaf logos-04.png/jpg` - Logo variant 4
+- `new leaf logos-05.png/jpg` - Logo variant 5
+
+### Using School Logos
+To use school logos in components:
+```jsx
+// Example usage in a component
+<img 
+  src="/images/newleaf/new leaf logos-01.png" 
+  alt="New Leaf School Logo" 
+  className="w-12 h-12" 
+/>
+```
+
+**Note**: Currently, the Header component uses an SVG placeholder icon instead of the actual school logo. To use the actual logo, replace the SVG in `src/components/layout/Header.jsx` with an `<img>` tag pointing to the desired logo variant.
+
 ## Development Guidelines
 
 ### Adding New Features
@@ -91,6 +115,7 @@ Row Level Security (RLS) is enabled with policies allowing public read access an
 2. For admin features: Add to `src/pages/admin/` under protected routes
 3. Database operations: Extend helper functions in `services/supabase.js`
 4. Styling: Use TailwindCSS with the custom color palette (primary green theme)
+5. Branding: Use official school logos from `public/images/newleaf/` directory
 
 ### File Upload Pattern
 Files are uploaded to Supabase Storage using the `uploadFile()` helper:
@@ -126,5 +151,8 @@ TailwindCSS is configured with:
 - `src/App.jsx` - Main routing and app structure
 - `src/context/AuthContext.jsx` - Authentication management
 - `src/services/supabase.js` - All database operations
+- `src/components/layout/Header.jsx` - Main navigation with logo placeholder (can be updated to use actual logos)
+- `src/components/admin/AdminSidebar.jsx` - Admin panel navigation with school branding
+- `public/images/newleaf/` - Directory containing official school logos and branding assets
 - `vite.config.js` - Build configuration and optimization
 - `netlify.toml` - Deployment and security configuration
