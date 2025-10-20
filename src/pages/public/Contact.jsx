@@ -62,53 +62,53 @@ const Contact = () => {
     {
       icon: '📞',
       title: 'Phone',
-      details: '+1 (555) 123-4567',
-      subtext: 'Main Office: Mon-Fri, 8AM-4PM'
+      details: '9495065324',
+      subtext: 'Main Office: Mon-Sat, 9AM-4PM IST'
     },
     {
       icon: '✉️',
       title: 'Email',
-      details: 'info@newleafschool.com',
+      details: 'newleafschoolpkd@gmail.com',
       subtext: 'We respond within 24 hours'
     },
     {
       icon: '📍',
       title: 'Address',
-      details: '123 Education Avenue, Learning City, LC 12345',
-      subtext: 'GPS: 40.7128, -74.0060'
+      details: 'Vettukad, Puthucode (PO), Palakkad, Kerala, India - 678687',
+      subtext: 'Under the banner of Heavens Pre-School'
     },
     {
       icon: '🕰️',
       title: 'Office Hours',
-      details: 'Monday - Friday: 8:00 AM - 4:00 PM',
-      subtext: 'Summer hours may vary'
+      details: 'Monday - Saturday: 9:00 AM - 4:00 PM IST',
+      subtext: 'Closed on Sundays'
     }
   ];
 
   const departments = [
     {
-      name: 'Admissions Office',
-      email: 'admissions@newleafschool.com',
-      phone: '+1 (555) 123-4568',
-      description: 'New student enrollment, school tours, and admission requirements'
+      name: 'Admissions & Enrollment',
+      email: 'newleafschoolpkd@gmail.com',
+      phone: '9495065324',
+      description: 'New student enrollment, school tours, admission requirements, and prospectus requests'
     },
     {
-      name: 'Academic Affairs',
-      email: 'academics@newleafschool.com',
-      phone: '+1 (555) 123-4569',
-      description: 'Curriculum questions, academic support, and teacher consultations'
+      name: 'Academic Department',
+      email: 'newleafschoolpkd@gmail.com',
+      phone: '9495065324',
+      description: 'Curriculum questions, academic support, English & Quranic education programs'
     },
     {
-      name: 'Student Services',
-      email: 'services@newleafschool.com',
-      phone: '+1 (555) 123-4570',
-      description: 'Counseling services, special needs support, and student wellness'
+      name: 'Administration Office',
+      email: 'newleafschoolpkd@gmail.com',
+      phone: '9495065324',
+      description: 'General inquiries, fees, transportation, and administrative matters'
     },
     {
-      name: 'Business Office',
-      email: 'business@newleafschool.com',
-      phone: '+1 (555) 123-4571',
-      description: 'Tuition, fees, financial aid, and payment inquiries'
+      name: 'Technology & LMS Support',
+      email: 'newleafschoolpkd@gmail.com',
+      phone: '9495065324',
+      description: 'Smart classroom support, LMS access, ERP systems, and technical assistance'
     }
   ];
 
@@ -367,29 +367,48 @@ const Contact = () => {
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-800 mb-2">Visit Our Campus</h3>
                   <p className="text-gray-600 mb-4">
-                    123 Education Avenue<br />
-                    Learning City, LC 12345
+                    Vettukad, Puthucode (PO)<br />
+                    Palakkad, Kerala, India - 678687
                   </p>
-                  <a 
-                    href="https://maps.google.com" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-teal-600 hover:text-teal-800 font-medium"
-                  >
-                    Get Directions →
-                  </a>
+                  <div className="space-y-2">
+                    <a 
+                      href="https://maps.app.goo.gl/NcFAqYgNrxWtUiZa7" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-teal-600 hover:text-teal-800 font-medium block"
+                    >
+                      Get Directions →
+                    </a>
+                    <a 
+                      href="https://share.google/PF8PCOunv7kNpPihA" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-teal-600 hover:text-teal-800 font-medium block"
+                    >
+                      View School Details →
+                    </a>
+                  </div>
                 </div>
               </div>
 
-              {/* Emergency Contact */}
-              <div className="bg-red-50 border border-red-200 rounded-lg p-6">
-                <h3 className="text-lg font-bold text-red-800 mb-2">Emergency Contact</h3>
-                <p className="text-red-700 mb-2">
-                  For urgent matters during school hours:
+              {/* Social Media & Additional Info */}
+              <div className="bg-primary-50 border border-primary-200 rounded-lg p-6">
+                <h3 className="text-lg font-bold text-primary-800 mb-2">Stay Connected</h3>
+                <p className="text-primary-700 mb-4">
+                  Follow us on social media for updates and announcements:
                 </p>
-                <p className="text-red-800 font-bold text-xl">+1 (555) 123-HELP</p>
-                <p className="text-red-600 text-sm mt-2">
-                  After hours, please contact local emergency services.
+                <div className="space-y-2">
+                  <div className="flex items-center text-primary-600">
+                    <span className="mr-2">📱</span>
+                    <span className="text-primary-700">Instagram: @newleafacademy_2016</span>
+                  </div>
+                  <div className="flex items-center text-primary-600">
+                    <span className="mr-2">📞</span>
+                    <span className="text-primary-700">Emergency: 9495065324</span>
+                  </div>
+                </div>
+                <p className="text-primary-600 text-sm mt-3">
+                  Office hours: Monday - Saturday, 9:00 AM to 4:00 PM IST
                 </p>
               </div>
             </div>

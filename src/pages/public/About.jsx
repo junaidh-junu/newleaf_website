@@ -100,8 +100,51 @@ const About = () => {
             About New Leaf School
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-            Nurturing minds, building character, and shaping the leaders of tomorrow since 1995
+            Nestled in Vettukad, Puthucode, Palakkad, Kerala - Transforming young minds through quality English & Quranic education
           </p>
+        </div>
+      </section>
+
+      {/* About Us Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-gray-800 mb-6">About New Leaf School</h2>
+              <p className="text-xl text-gray-600 leading-relaxed">
+                Welcome to New Leaf School, proudly located in Vettukad, Puthucode (PO), Palakkad, Kerala, India - 678687. 
+                As a nurturing institution under the banner of Heavens Pre-School, we offer transformative education from 
+                Kindergarten to High School, starting at age 3.5.
+              </p>
+            </div>
+            
+            <div className="bg-gray-50 p-8 rounded-lg shadow-lg mb-8">
+              <h3 className="text-2xl font-bold text-primary-600 mb-4">Our Educational Philosophy</h3>
+              <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                Our core mission is to deliver a unique blend of English and Quranic education, enriched with advanced 
+                Learning Management Systems (LMS), Enterprise Resource Planning (ERP) tools, and state-of-the-art smart 
+                classrooms. We are committed to instilling moral values and essential skills, leveraging cutting-edge 
+                technology to prepare students for a competitive, knowledge-driven world.
+              </p>
+              <p className="text-gray-700 text-lg leading-relaxed">
+                Rooted in our village community, New Leaf School aims to shape confident, capable individuals who 
+                contribute meaningfully to society, blending tradition with innovation to inspire future leaders.
+              </p>
+            </div>
+            
+            <div className="bg-primary-50 p-8 rounded-lg shadow-lg">
+              <h3 className="text-2xl font-bold text-primary-600 mb-4">Why Choose New Leaf School?</h3>
+              <p className="text-gray-700 text-lg leading-relaxed">
+                New Leaf School stands apart by offering a balanced education that merges English mastery and Quranic 
+                teachings with modern technology, including smart classrooms and sophisticated LMS and ERP systems. 
+                Catering to students from Kindergarten to High School, we start early at age 3.5 to build a strong 
+                foundation in academics and values. Our innovative approach ensures students are equipped with skills to 
+                compete in a fast-evolving society, while our nurturing, value-driven environment fosters their growth 
+                as responsible citizens. Choose New Leaf School in Palakkad, Kerala, for a forward-thinking education 
+                that prepares students to lead and inspire.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -111,20 +154,31 @@ const About = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <div className="bg-white p-8 rounded-lg shadow-lg">
-                <h2 className="text-3xl font-bold text-primary-600 mb-4">Our Mission</h2>
+                <h2 className="text-3xl font-bold text-primary-600 mb-4">Our Vision</h2>
                 <p className="text-gray-700 text-lg leading-relaxed">
-                  To provide a nurturing and challenging educational environment that empowers students 
-                  to become confident, creative, and responsible global citizens. We are committed to 
-                  fostering academic excellence, character development, and lifelong learning.
+                  To provide an education that transforms students through rigorous coursework and by providing 
+                  an understanding of the needs of society and industry. To collaborate with other academic and 
+                  research institutes around the world to strengthen the education and research ecosystem.
                 </p>
               </div>
               
               <div className="bg-white p-8 rounded-lg shadow-lg">
-                <h2 className="text-3xl font-bold text-blue-600 mb-4">Our Vision</h2>
+                <h2 className="text-3xl font-bold text-blue-600 mb-4">Our Mission</h2>
                 <p className="text-gray-700 text-lg leading-relaxed">
-                  To be a leading educational institution recognized for innovation, excellence, and 
-                  the holistic development of students who will contribute positively to society and 
-                  make a meaningful difference in the world.
+                  Its aim is to spread the teachings of truth and values in the light of proper education. 
+                  It aims to promote value-based knowledge, enhance social development, and inculcate sincere 
+                  love and respect for each and every individual.
+                </p>
+              </div>
+              
+              <div className="bg-white p-8 rounded-lg shadow-lg">
+                <h2 className="text-3xl font-bold text-green-600 mb-4">Our Objective</h2>
+                <p className="text-gray-700 text-lg leading-relaxed">
+                  Our school is dedicated to providing quality English education and Quranic education to children 
+                  starting from the age of 3.5. We aim to instill strong moral values and essential skills, 
+                  leveraging advanced technology as a platform for learning. Our objective is to mold each student 
+                  to excel in a rapidly evolving society where knowledge and skills are paramount, empowering them 
+                  to make significant contributions to their community and beyond.
                 </p>
               </div>
             </div>

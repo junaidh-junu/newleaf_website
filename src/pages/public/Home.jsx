@@ -132,21 +132,6 @@ const Home = () => {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Our Mission */}
-            <div className="text-center p-8 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow duration-300">
-              <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center">
-                  <svg className="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                  </svg>
-                </div>
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-neutral-800">Our Mission</h3>
-              <p className="text-neutral-600 leading-relaxed">
-                To provide comprehensive quality education with excellent student learning opportunities and an environment of learning and development that motivates students to achieve their full potential.
-              </p>
-            </div>
-
             {/* Our Vision */}
             <div className="text-center p-8 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow duration-300">
               <div className="flex justify-center mb-6">
@@ -159,7 +144,22 @@ const Home = () => {
               </div>
               <h3 className="text-2xl font-bold mb-4 text-neutral-800">Our Vision</h3>
               <p className="text-neutral-600 leading-relaxed">
-                To become the premier institution providing high quality education to nurture responsible and competitive global citizens equipped with strong moral values and innovative thinking.
+                To provide an education that transforms students through rigorous coursework and by providing an understanding of the needs of society and industry. To collaborate with other academic and research institutes around the world to strengthen the education and research ecosystem.
+              </p>
+            </div>
+
+            {/* Our Mission */}
+            <div className="text-center p-8 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow duration-300">
+              <div className="flex justify-center mb-6">
+                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center">
+                  <svg className="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-neutral-800">Our Mission</h3>
+              <p className="text-neutral-600 leading-relaxed">
+                Its aim is to spread the teachings of truth and values in the light of proper education. It aims to promote value-based knowledge, enhance social development, and inculcate sincere love and respect for each and every individual.
               </p>
             </div>
 
@@ -174,7 +174,7 @@ const Home = () => {
               </div>
               <h3 className="text-2xl font-bold mb-4 text-neutral-800">Our Objective</h3>
               <p className="text-neutral-600 leading-relaxed">
-                To create a positive learning environment that enables each student to discover and develop their talents, building character and confidence for future success.
+                Our school is dedicated to providing quality English education and Quranic education to children starting from the age of 3.5. We aim to instill strong moral values and essential skills, leveraging advanced technology as a platform for learning. Our objective is to mold each student to excel in a rapidly evolving society where knowledge and skills are paramount, empowering them to make significant contributions to their community and beyond.
               </p>
             </div>
           </div>
@@ -323,63 +323,169 @@ const Home = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Computer Lab */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {/* Playground & Sports */}
             <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-              <div className="h-48 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-                <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              <div className="h-40 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1.5a1.5 1.5 0 011.5 1.5V14" />
                 </svg>
               </div>
-              <div className="p-6 text-center">
-                <h3 className="text-xl font-bold mb-2 text-neutral-800">Computer Lab</h3>
+              <div className="p-4 text-center">
+                <h3 className="text-lg font-bold mb-2 text-neutral-800">Playground & Sports</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
-                  State-of-the-art computer laboratory equipped with modern systems and high-speed internet connectivity for digital learning.
+                  Well-maintained playground and indoor areas for sports, karate training, and physical development activities.
                 </p>
               </div>
             </div>
 
-            {/* Science Lab */}
+            {/* Smart Classrooms */}
             <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-              <div className="h-48 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
-                <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+              <div className="h-40 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
-              <div className="p-6 text-center">
-                <h3 className="text-xl font-bold mb-2 text-neutral-800">Science Lab</h3>
+              <div className="p-4 text-center">
+                <h3 className="text-lg font-bold mb-2 text-neutral-800">Smart Classrooms</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
-                  Fully equipped science laboratories with modern apparatus and safety equipment for hands-on learning experiences.
+                  State-of-the-art smart classrooms integrated with LMS and ERP systems for modern digital learning experiences.
+                </p>
+              </div>
+            </div>
+
+            {/* Prayer Areas */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div className="h-40 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M10.5 3L12 2l1.5 1H21l-4 4v3H7v-3L3 4h7.5z" />
+                </svg>
+              </div>
+              <div className="p-4 text-center">
+                <h3 className="text-lg font-bold mb-2 text-neutral-800">Prayer Areas</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Well-organized prayer areas specifically designed for Quranic education and spiritual development.
+                </p>
+              </div>
+            </div>
+
+            {/* Computer Lab */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div className="h-40 bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center">
+                <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                </svg>
+              </div>
+              <div className="p-4 text-center">
+                <h3 className="text-lg font-bold mb-2 text-neutral-800">Computer Lab</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Advanced computer laboratory with modern systems and high-speed internet for technology education.
                 </p>
               </div>
             </div>
 
             {/* Library */}
             <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-              <div className="h-48 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
-                <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="h-40 bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center">
+                <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
               </div>
-              <div className="p-6 text-center">
-                <h3 className="text-xl font-bold mb-2 text-neutral-800">Library</h3>
+              <div className="p-4 text-center">
+                <h3 className="text-lg font-bold mb-2 text-neutral-800">Library</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
-                  Comprehensive library with thousands of books, digital resources, and quiet study spaces for research and learning.
+                  Comprehensive library with educational books, digital resources, and quiet study spaces.
+                </p>
+              </div>
+            </div>
+
+            {/* CCTV Security */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div className="h-40 bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center">
+                <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </div>
+              <div className="p-4 text-center">
+                <h3 className="text-lg font-bold mb-2 text-neutral-800">CCTV Security</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Comprehensive CCTV surveillance system ensuring a secure campus with trained staff supervision.
+                </p>
+              </div>
+            </div>
+
+            {/* Health & Facilities */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div className="h-40 bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center">
+                <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              </div>
+              <div className="p-4 text-center">
+                <h3 className="text-lg font-bold mb-2 text-neutral-800">Health & Wellness</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  First-aid facilities, child-friendly washrooms, filtered drinking water, and wellness support.
+                </p>
+              </div>
+            </div>
+
+            {/* Students' Garden */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div className="h-40 bg-gradient-to-br from-green-500 to-lime-600 flex items-center justify-center">
+                <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+              </div>
+              <div className="p-4 text-center">
+                <h3 className="text-lg font-bold mb-2 text-neutral-800">Students' Garden</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Sustainable students' garden promoting environmental awareness and hands-on learning experiences.
+                </p>
+              </div>
+            </div>
+
+            {/* Art & Creative Areas */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div className="h-40 bg-gradient-to-br from-pink-400 to-rose-600 flex items-center justify-center">
+                <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4c2.21 0 4-1.79 4-4V5z" />
+                </svg>
+              </div>
+              <div className="p-4 text-center">
+                <h3 className="text-lg font-bold mb-2 text-neutral-800">Arts & Creativity</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Dedicated areas for art training and abacus learning, fostering creativity and cognitive development.
                 </p>
               </div>
             </div>
 
             {/* Transportation */}
             <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-              <div className="h-48 bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center">
-                <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="h-40 bg-gradient-to-br from-yellow-400 to-amber-600 flex items-center justify-center">
+                <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
                 </svg>
               </div>
-              <div className="p-6 text-center">
-                <h3 className="text-xl font-bold mb-2 text-neutral-800">Transportation</h3>
+              <div className="p-4 text-center">
+                <h3 className="text-lg font-bold mb-2 text-neutral-800">Transportation</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
-                  Safe and reliable school transportation service covering wide areas with experienced drivers and route supervisors.
+                  Safe school transportation ensuring accessibility with experienced drivers and route management.
+                </p>
+              </div>
+            </div>
+
+            {/* Clean Environment */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div className="h-40 bg-gradient-to-br from-emerald-400 to-green-600 flex items-center justify-center">
+                <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+              </div>
+              <div className="p-4 text-center">
+                <h3 className="text-lg font-bold mb-2 text-neutral-800">Clean Environment</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Calm, pollution-free learning environment prioritizing cleanliness and student well-being.
                 </p>
               </div>
             </div>
