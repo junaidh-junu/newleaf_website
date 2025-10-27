@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getLogoConfig } from '../../config/assets';
 
 const SchoolsShowcase = () => {
   return (
@@ -17,15 +18,12 @@ const SchoolsShowcase = () => {
           <div className="card group text-center shimmer-effect perspective-1000 bg-white/80">
             <div className="relative mb-8 flex justify-center">
               <div className="relative">
-                <div className="w-32 h-32 bg-gradient-to-br from-orange-500 via-blue-500 to-pink-500 rounded-3xl flex items-center justify-center shadow-heavens-orange floating-element group-hover:shadow-glow transition-all duration-500 p-4">
-                  {/* Placeholder for Heavens logo */}
-                  <div className="w-full h-full bg-white/90 rounded-2xl flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-orange-500 mb-1">H</div>
-                      <div className="w-8 h-1 bg-gradient-to-r from-orange-500 via-blue-500 to-pink-500 rounded-full mx-auto mb-1"></div>
-                      <div className="text-xs text-neutral-600 font-medium">LOGO</div>
-                    </div>
-                  </div>
+                <div className="w-32 h-32 bg-white rounded-3xl flex items-center justify-center shadow-heavens-orange floating-element group-hover:shadow-glow transition-all duration-500 p-4">
+                  <img 
+                    src={getLogoConfig('HEAVENS').src}
+                    alt={getLogoConfig('HEAVENS').alt}
+                    className={getLogoConfig('HEAVENS').className}
+                  />
                 </div>
                 <div className="absolute -inset-3 bg-gradient-to-br from-orange-400 via-blue-400 to-pink-400 rounded-3xl blur opacity-0 group-hover:opacity-30 transition-all duration-500"></div>
               </div>
@@ -57,16 +55,12 @@ const SchoolsShowcase = () => {
           <div className="card group text-center shimmer-effect perspective-1000 bg-white/80">
             <div className="relative mb-8 flex justify-center">
               <div className="relative">
-                <div className="w-32 h-32 bg-gradient-to-br from-primary-500 to-accent-500 rounded-3xl flex items-center justify-center shadow-neon floating-element group-hover:shadow-glow transition-all duration-500 p-4" style={{animationDelay: '1s'}}>
-                  {/* Placeholder for New Leaf logo */}
-                  <div className="w-full h-full bg-white/90 rounded-2xl flex items-center justify-center">
-                    <div className="text-center">
-                      <svg className="w-12 h-12 text-primary-600 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                      </svg>
-                      <div className="text-xs text-neutral-600 font-medium">LOGO</div>
-                    </div>
-                  </div>
+                <div className="w-32 h-32 bg-white rounded-3xl flex items-center justify-center shadow-neon floating-element group-hover:shadow-glow transition-all duration-500 p-4" style={{animationDelay: '1s'}}>
+                  <img 
+                    src={getLogoConfig('HERO').src}
+                    alt={getLogoConfig('HERO').alt}
+                    className={getLogoConfig('HERO').className}
+                  />
                 </div>
                 <div className="absolute -inset-3 bg-gradient-to-br from-primary-400 to-accent-400 rounded-3xl blur opacity-0 group-hover:opacity-30 transition-all duration-500"></div>
               </div>

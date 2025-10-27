@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getPosts, getEvents } from '../../services/supabase';
 import SchoolsShowcase from '../../components/ui/SchoolsShowcase';
+import { getLogoConfig } from '../../config/assets';
 
 const Home = () => {
   const [latestPosts, setLatestPosts] = useState([]);
@@ -87,6 +88,17 @@ const Home = () => {
         <div className="relative z-10 h-full flex items-center">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center text-white">
+              {/* School Logo */}
+              <div className="mb-8 flex justify-center">
+                <div className="w-24 h-24 bg-white/10 backdrop-blur-sm rounded-3xl flex items-center justify-center p-4 shadow-2xl">
+                  <img 
+                    src={getLogoConfig('HERO').src}
+                    alt={getLogoConfig('HERO').alt}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              </div>
+              
               <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight">
                 NEW LEAF SCHOOL
               </h1>
