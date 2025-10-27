@@ -4,8 +4,8 @@ import { SCHOOL_LOGOS, LOGO_CONFIGS, getLogo, getLogoConfig } from '../../config
 /**
  * Reusable School Logo Component
  * 
- * @param {string} type - Pre-configured logo type: 'HEADER', 'ADMIN_SIDEBAR', 'FOOTER', 'HERO'
- * @param {string} variant - Logo variant: 'PRIMARY', 'VARIANT_2', 'VARIANT_3', 'VARIANT_4', 'VARIANT_5'
+ * @param {string} type - Pre-configured logo type: 'HEADER', 'ADMIN_SIDEBAR', 'FOOTER', 'HERO', 'HEAVENS', 'NEW_LEAF', 'NEW_LEAF_ICON'
+ * @param {string} variant - Logo variant: 'COMBINED', 'NEW_LEAF_SCHOOL', 'NEW_LEAF_LOGO', 'HEAVENS'
  * @param {string} format - Image format: 'png' or 'jpg'
  * @param {string} className - Custom CSS classes
  * @param {string} alt - Custom alt text
@@ -44,11 +44,11 @@ const SchoolLogo = ({
     );
   }
 
-  // Default to primary logo
+  // Default to combined logo
   return (
     <img
-      src={SCHOOL_LOGOS.PRIMARY}
-      alt={alt || 'New Leaf School Logo'}
+      src={SCHOOL_LOGOS.COMBINED}
+      alt={alt || 'New Leaf & Heavens School Logo'}
       className={className || 'w-12 h-12 object-contain'}
       {...props}
     />

@@ -28,10 +28,11 @@ import SchoolLogo from '../ui/SchoolLogo';
 <SchoolLogo type="HERO" />
 
 // Use specific variant
-<SchoolLogo variant="VARIANT_2" />
+<SchoolLogo variant="NEW_LEAF_SCHOOL" />
+<SchoolLogo variant="HEAVENS" />
 
 // Use JPG format
-<SchoolLogo variant="PRIMARY" format="jpg" />
+<SchoolLogo variant="COMBINED" format="jpg" />
 
 // Custom styling
 <SchoolLogo 
@@ -47,7 +48,9 @@ import SchoolLogo from '../ui/SchoolLogo';
 import { SCHOOL_LOGOS, LOGO_CONFIGS, SCHOOL_INFO } from '../config/assets';
 
 // Direct logo usage
-<img src={SCHOOL_LOGOS.PRIMARY} alt="School Logo" className="w-12 h-12" />
+<img src={SCHOOL_LOGOS.COMBINED} alt="School Logo" className="w-12 h-12" />
+<img src={SCHOOL_LOGOS.NEW_LEAF_SCHOOL} alt="New Leaf School" className="w-12 h-12" />
+<img src={SCHOOL_LOGOS.HEAVENS} alt="Heavens School" className="w-12 h-12" />
 
 // Using pre-configured settings
 const headerConfig = LOGO_CONFIGS.HEADER;
@@ -68,7 +71,7 @@ const headerConfig = LOGO_CONFIGS.HEADER;
 import { getLogo, getLogoConfig } from '../config/assets';
 
 // Get specific variant and format
-const logoSrc = getLogo('VARIANT_3', 'jpg');
+const logoSrc = getLogo('NEW_LEAF_SCHOOL', 'jpg');
 <img src={logoSrc} alt="School Logo" />
 
 // Get pre-configured logo settings
@@ -82,18 +85,20 @@ const config = getLogoConfig('HERO');
 
 ## Available Logo Variants
 
-- **PRIMARY** - `new leaf logos-01` (PNG/JPG)
-- **VARIANT_2** - `new leaf logos-02` (PNG/JPG) 
-- **VARIANT_3** - `new leaf logos-03` (PNG/JPG)
-- **VARIANT_4** - `new leaf logos-04` (PNG/JPG)
-- **VARIANT_5** - `new leaf logos-05` (PNG/JPG)
+- **COMBINED** - `school_logo` (PNG/JPG) - Combined logo with both schools and Human Care Foundation
+- **NEW_LEAF_SCHOOL** - `new_leaf_school` (PNG/JPG) - New Leaf School logo with school name
+- **NEW_LEAF_LOGO** - `new_leaf_logo` (PNG/JPG) - New Leaf logo only (without school name)
+- **HEAVENS** - `heavens` (PNG/JPG) - Heavens School logo
 
 ## Pre-configured Logo Types
 
-- **HEADER** - 12x12 size, for navigation headers
-- **ADMIN_SIDEBAR** - 8x8 size, for admin panel sidebar
-- **FOOTER** - 16x16 size, for footer sections
-- **HERO** - 32x32 size, for hero sections and large displays
+- **HEADER** - 12x12 size, uses combined logo, for navigation headers
+- **ADMIN_SIDEBAR** - 8x8 size, uses New Leaf School logo with name, for admin panel sidebar
+- **FOOTER** - 16x16 size, uses combined logo, for footer sections
+- **HERO** - 32x32 size, uses combined logo, for hero sections and large displays
+- **HEAVENS** - 24x24 size, uses Heavens School logo
+- **NEW_LEAF** - 24x24 size, uses New Leaf School logo with name
+- **NEW_LEAF_ICON** - 12x12 size, uses New Leaf logo only (without school name)
 
 ## Example: Updating Header Component
 

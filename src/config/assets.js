@@ -6,60 +6,72 @@
 
 // School Logos - All variants available
 export const SCHOOL_LOGOS = {
-  // New Leaf School logo (for main school branding)
-  NEW_LEAF: '/images/newleaf/new leaf logos-02.png',
-  NEW_LEAF_JPG: '/images/newleaf/new leaf logos-02.jpg',
+  // Combined logo (both schools + Human Care Foundation)
+  COMBINED: '/images/newleaf/school_logo.png',
+  COMBINED_JPG: '/images/newleaf/school_logo.jpg',
   
-  // Heavens Preschool logo
-  HEAVENS: '/images/newleaf/new leaf logos-01.png',
-  HEAVENS_JPG: '/images/newleaf/new leaf logos-01.jpg',
+  // New Leaf School logo with school name
+  NEW_LEAF_SCHOOL: '/images/newleaf/new_leaf_school.png',
+  NEW_LEAF_SCHOOL_JPG: '/images/newleaf/new_leaf_school.jpg',
   
-  // Alternative logo variants
-  VARIANT_3: '/images/newleaf/new leaf logos-03.png',
-  VARIANT_3_JPG: '/images/newleaf/new leaf logos-03.jpg',
+  // New Leaf logo only (without school name)
+  NEW_LEAF_LOGO: '/images/newleaf/new_leaf_logo.png',
+  NEW_LEAF_LOGO_JPG: '/images/newleaf/new_leaf_logo.jpg',
   
-  VARIANT_4: '/images/newleaf/new leaf logos-04.png',
-  VARIANT_4_JPG: '/images/newleaf/new leaf logos-04.jpg',
-  
-  VARIANT_5: '/images/newleaf/new leaf logos-05.png',
-  VARIANT_5_JPG: '/images/newleaf/new leaf logos-05.jpg',
+  // Heavens School logo
+  HEAVENS: '/images/newleaf/heavens.png',
+  HEAVENS_JPG: '/images/newleaf/heavens.jpg',
 };
 
 // Commonly used logo configurations
 export const LOGO_CONFIGS = {
-  // Header logo configuration
+  // Header logo configuration (combined logo for main navigation)
   HEADER: {
-    src: SCHOOL_LOGOS.NEW_LEAF,
-    alt: 'New Leaf School Logo',
+    src: SCHOOL_LOGOS.COMBINED,
+    alt: 'New Leaf & Heavens School Logo',
     className: 'w-12 h-12 object-contain'
   },
   
-  // Admin sidebar logo configuration
+  // Admin sidebar logo configuration (New Leaf with school name)
   ADMIN_SIDEBAR: {
-    src: SCHOOL_LOGOS.NEW_LEAF,
+    src: SCHOOL_LOGOS.NEW_LEAF_SCHOOL,
     alt: 'New Leaf School',
     className: 'w-8 h-8 object-contain'
   },
   
-  // Footer logo configuration
+  // Footer logo configuration (combined logo)
   FOOTER: {
-    src: SCHOOL_LOGOS.NEW_LEAF,
+    src: SCHOOL_LOGOS.COMBINED,
     alt: 'New Leaf School & Heavens Preschool',
     className: 'w-16 h-16 object-contain'
   },
   
   // Large display logo (for hero sections, about page, etc.)
   HERO: {
-    src: SCHOOL_LOGOS.NEW_LEAF,
+    src: SCHOOL_LOGOS.COMBINED,
     alt: 'New Leaf School & Heavens Preschool',
     className: 'w-32 h-32 object-contain'
   },
   
-  // Heavens Preschool logo configuration
+  // Heavens School logo configuration
   HEAVENS: {
     src: SCHOOL_LOGOS.HEAVENS,
-    alt: 'Heavens Preschool Logo',
+    alt: 'Heavens School Logo',
     className: 'w-24 h-24 object-contain'
+  },
+  
+  // New Leaf School logo with name
+  NEW_LEAF: {
+    src: SCHOOL_LOGOS.NEW_LEAF_SCHOOL,
+    alt: 'New Leaf School',
+    className: 'w-24 h-24 object-contain'
+  },
+  
+  // New Leaf logo only (without school name)
+  NEW_LEAF_ICON: {
+    src: SCHOOL_LOGOS.NEW_LEAF_LOGO,
+    alt: 'New Leaf Logo',
+    className: 'w-12 h-12 object-contain'
   }
 };
 
@@ -71,9 +83,9 @@ export const SCHOOL_INFO = {
 };
 
 // Utility function to get logo with fallback
-export const getLogo = (variant = 'PRIMARY', format = 'png') => {
+export const getLogo = (variant = 'COMBINED', format = 'png') => {
   const key = format === 'jpg' ? `${variant}_JPG` : variant;
-  return SCHOOL_LOGOS[key] || SCHOOL_LOGOS.PRIMARY;
+  return SCHOOL_LOGOS[key] || SCHOOL_LOGOS.COMBINED;
 };
 
 // Utility function to get logo config

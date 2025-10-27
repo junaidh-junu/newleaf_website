@@ -89,24 +89,50 @@ Row Level Security (RLS) is enabled with policies allowing public read access an
 
 ### School Logos
 School logos are stored in `public/images/newleaf/` directory:
-- `new leaf logos-01.png/jpg` - Primary logo variant 1
-- `new leaf logos-02.png/jpg` - Primary logo variant 2  
-- `new leaf logos-03.png/jpg` - Logo variant 3
-- `new leaf logos-04.png/jpg` - Logo variant 4
-- `new leaf logos-05.png/jpg` - Logo variant 5
+
+**Heavens School Logo:**
+- `heavens.png/jpg` - Heavens School logo
+
+**New Leaf School Logos:**
+- `new_leaf_logo.png/jpg` - New Leaf logo only (without school name)
+- `new_leaf_school.png/jpg` - New Leaf logo with school name
+
+**Combined Logo:**
+- `school_logo.png/jpg` - Combined logo featuring both schools and Human Care Foundation
 
 ### Using School Logos
 To use school logos in components:
 ```jsx
-// Example usage in a component
+// Combined logo (recommended for headers/branding)
 <img 
-  src="/images/newleaf/new leaf logos-01.png" 
-  alt="New Leaf School Logo" 
+  src="/images/newleaf/school_logo.png" 
+  alt="New Leaf & Heavens School Logo" 
+  className="w-12 h-12" 
+/>
+
+// New Leaf with school name
+<img 
+  src="/images/newleaf/new_leaf_school.png" 
+  alt="New Leaf School" 
+  className="w-12 h-12" 
+/>
+
+// New Leaf logo only
+<img 
+  src="/images/newleaf/new_leaf_logo.png" 
+  alt="New Leaf Logo" 
+  className="w-12 h-12" 
+/>
+
+// Heavens School logo
+<img 
+  src="/images/newleaf/heavens.png" 
+  alt="Heavens School" 
   className="w-12 h-12" 
 />
 ```
 
-**Note**: Currently, the Header component uses an SVG placeholder icon instead of the actual school logo. To use the actual logo, replace the SVG in `src/components/layout/Header.jsx` with an `<img>` tag pointing to the desired logo variant.
+**Note**: Currently, the Header component uses an SVG placeholder icon instead of the actual school logo. Consider using `school_logo.png` (combined logo) for the main header to represent both schools and the foundation.
 
 ## Development Guidelines
 

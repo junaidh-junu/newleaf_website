@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { getLogoConfig, SCHOOL_INFO } from '../../config/assets';
 
 const AdminSidebar = ({ isOpen, setIsOpen }) => {
   const location = useLocation();
@@ -79,10 +80,14 @@ const AdminSidebar = ({ isOpen, setIsOpen }) => {
         {/* Header */}
         <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200">
           <Link to="/" className="flex items-center">
-            <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">NL</span>
+            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center border border-gray-200 p-1">
+              <img 
+                src={getLogoConfig('ADMIN_SIDEBAR').src}
+                alt={getLogoConfig('ADMIN_SIDEBAR').alt}
+                className={getLogoConfig('ADMIN_SIDEBAR').className}
+              />
             </div>
-            <span className="ml-3 text-xl font-bold text-gray-900">New Leaf</span>
+            <span className="ml-3 text-xl font-bold text-gray-900">{SCHOOL_INFO.NAME}</span>
           </Link>
           <button
             onClick={() => setIsOpen(false)}
