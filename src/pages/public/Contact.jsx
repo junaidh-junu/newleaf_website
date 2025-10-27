@@ -62,7 +62,7 @@ const Contact = () => {
     {
       icon: '📞',
       title: 'Phone',
-      details: '9495065324',
+      details: '+91 9495065324',
       subtext: 'Main Office: Mon-Sat, 9AM-4PM IST'
     },
     {
@@ -74,8 +74,8 @@ const Contact = () => {
     {
       icon: '📍',
       title: 'Address',
-      details: 'Vettukad, Puthucode (PO), Palakkad, Kerala, India - 678687',
-      subtext: 'Under the banner of Heavens Pre-School'
+      details: 'New Leaf School, Vettukad, Puthucode (PO), Palakkad, Kerala - 678687',
+      subtext: 'Located in the heart of Puthucode'
     },
     {
       icon: '🕰️',
