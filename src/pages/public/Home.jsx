@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getPosts, getEvents } from '../../services/supabase';
 import SchoolsShowcase from '../../components/ui/SchoolsShowcase';
-import { getLogoConfig } from '../../config/assets';
+import { getLogoConfig, SCHOOL_LOGOS } from '../../config/assets';
 
 const Home = () => {
   const [latestPosts, setLatestPosts] = useState([]);
@@ -77,7 +77,7 @@ const Home = () => {
         <div className="absolute inset-0">
           <div 
             className="w-full h-full relative bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: "url('/images/school.jpg')" }}
+            style={{ backgroundImage: `url('${SCHOOL_LOGOS.SCHOOL_HERO}')` }}
           >
             {/* Overlay for better text readability */}
             <div className="absolute inset-0 bg-gradient-to-r from-primary-900/80 to-primary-800/70"></div>
@@ -90,21 +90,14 @@ const Home = () => {
             <div className="max-w-4xl mx-auto text-center text-white">
               {/* School Logo */}
               <div className="mb-8 flex justify-center">
-                <div className="w-24 h-24 bg-white/10 backdrop-blur-sm rounded-3xl flex items-center justify-center p-4 shadow-2xl">
+                <div className="w-128 h-80 bg-white backdrop-blur-sm rounded-3xl flex items-center justify-center p-1 shadow-2xl">
                   <img 
                     src={getLogoConfig('HERO').src}
-                    alt={getLogoConfig('HERO').alt}
+                    alt="New Leaf School & Heavens Preschool"
                     className="w-full h-full object-contain"
                   />
                 </div>
               </div>
-              
-              <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight">
-                NEW LEAF SCHOOL
-              </h1>
-              <p className="text-xl md:text-2xl font-light mb-4 opacity-90">
-                & HEAVENS PRESCHOOL
-              </p>
               <p className="text-lg md:text-xl mb-8 opacity-80 max-w-3xl mx-auto leading-relaxed">
                 Excellence in Education - Nurturing young minds for a brighter future through quality education, innovative teaching methods, and holistic development.
               </p>

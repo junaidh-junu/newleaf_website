@@ -21,6 +21,9 @@ export const SCHOOL_LOGOS = {
   // Heavens School logo
   HEAVENS: '/images/newleaf/heavens.png',
   HEAVENS_JPG: '/images/newleaf/heavens.jpg',
+  
+  // Hero section background image
+  SCHOOL_HERO: '/images/school.jpg',
 };
 
 // Commonly used logo configurations
