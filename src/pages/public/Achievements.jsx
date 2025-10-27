@@ -86,10 +86,10 @@ const Achievements = () => {
       description: "Recognition across academics, arts, and athletics"
     },
     {
-      number: "98%",
-      label: "College Acceptance",
-      icon: "🎓",
-      description: "Graduate college acceptance rate over 5 years"
+      number: "95%",
+      label: "Student Satisfaction",
+      icon: "😊",
+      description: "Parent and student satisfaction survey results"
     },
     {
       number: "50+",

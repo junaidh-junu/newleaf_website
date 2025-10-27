@@ -5,7 +5,7 @@ const Academics = () => {
 
   const programs = {
     elementary: {
-      title: "Elementary School (K-5)",
+      title: "Kindergarten (K)",
       description: "Building strong foundations in core subjects while fostering curiosity and creativity.",
       subjects: [
         {
@@ -35,7 +35,7 @@ const Academics = () => {
       ]
     },
     middle: {
-      title: "Middle School (6-8)",
+      title: "Middle School (2-7)",
       description: "Challenging curriculum that prepares students for high school while developing critical thinking skills.",
       subjects: [
         {
@@ -150,7 +150,7 @@ const Academics = () => {
                 activeTab === 'elementary' ? 'bg-white text-blue-600' : 'bg-blue-700 hover:bg-blue-800'
               }`}
             >
-              Elementary (K-5)
+              Kindergarten (K)
             </button>
             <button
               onClick={() => setActiveTab('middle')}
@@ -158,7 +158,7 @@ const Academics = () => {
                 activeTab === 'middle' ? 'bg-white text-blue-600' : 'bg-blue-700 hover:bg-blue-800'
               }`}
             >
-              Middle School (6-8)
+              Middle School (2-7)
             </button>
           </div>
         </div>

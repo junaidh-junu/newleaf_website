@@ -93,7 +93,7 @@ const SchoolsShowcase = () => {
               className="btn-primary group px-10 py-4 text-lg"
             >
               <span className="relative z-10 flex items-center space-x-2">
-                <span>Visit Our Schools</span>
+                <span>Visit Our School</span>
                 <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>

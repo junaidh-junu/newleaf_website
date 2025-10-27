@@ -190,7 +190,7 @@ const About = () => {
                 className="rounded-lg shadow-xl w-full h-96 object-cover"
               />
               <div className="absolute -bottom-6 -right-6 bg-primary-500 text-white p-6 rounded-lg shadow-lg">
-                <div className="text-3xl font-bold">30+</div>
+                <div className="text-3xl font-bold">5+</div>
                 <div className="text-sm">Years of Excellence</div>
               </div>
             </div>
@@ -299,15 +299,15 @@ const About = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             <div className="space-y-2">
-              <div className="text-4xl font-bold">800+</div>
+              <div className="text-4xl font-bold">250+</div>
               <div className="text-primary-100">Happy Students</div>
             </div>
             <div className="space-y-2">
-              <div className="text-4xl font-bold">50+</div>
+              <div className="text-4xl font-bold">15+</div>
               <div className="text-primary-100">Expert Teachers</div>
             </div>
             <div className="space-y-2">
-              <div className="text-4xl font-bold">30</div>
+              <div className="text-4xl font-bold">5</div>
               <div className="text-primary-100">Years of Excellence</div>
             </div>
             <div className="space-y-2">

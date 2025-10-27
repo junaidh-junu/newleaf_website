@@ -223,7 +223,7 @@ const Home = () => {
                 </p>
                 
                 <p>
-                  With over <span className="font-semibold text-primary-600">15 years of experience</span>, we have been consistently providing high-quality education that combines traditional values with modern teaching methodologies. Our experienced faculty is dedicated to nurturing each student's individual talents and capabilities.
+                  With over <span className="font-semibold text-primary-600">5 years of experience</span>, we have been consistently providing high-quality education that combines traditional values with modern teaching methodologies. Our experienced faculty is dedicated to nurturing each student's individual talents and capabilities.
                 </p>
                 
                 <p>
