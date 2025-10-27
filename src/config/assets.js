@@ -25,11 +25,11 @@ export const SCHOOL_LOGOS = {
 
 // Commonly used logo configurations
 export const LOGO_CONFIGS = {
-  // Header logo configuration (combined logo for main navigation)
+  // Header logo configuration (New Leaf logo only for main navigation)
   HEADER: {
-    src: SCHOOL_LOGOS.COMBINED,
-    alt: 'New Leaf & Heavens School Logo',
-    className: 'w-12 h-12 object-contain'
+    src: SCHOOL_LOGOS.NEW_LEAF_LOGO,
+    alt: 'New Leaf Logo',
+    className: 'w-14 h-14 object-contain'
   },
   
   // Admin sidebar logo configuration (New Leaf with school name)

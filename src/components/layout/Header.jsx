@@ -41,7 +41,7 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="group flex items-center space-x-3">
             <div className="relative">
-              <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-neon transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 overflow-hidden p-2">
+              <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-neon transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 overflow-hidden p-2">
                 <img 
                   src={getLogoConfig('HEADER').src}
                   alt={getLogoConfig('HEADER').alt}
