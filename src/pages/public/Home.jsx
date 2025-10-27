@@ -181,7 +181,7 @@ const Home = () => {
               </div>
               <h3 className="text-2xl font-bold mb-4 text-neutral-800">Our Objective</h3>
               <p className="text-neutral-600 leading-relaxed">
-                Our school is dedicated to providing quality English education and Quranic education to children starting from the age of 3.5. We aim to instill strong moral values and essential skills, leveraging advanced technology as a platform for learning. Our objective is to mold each student to excel in a rapidly evolving society where knowledge and skills are paramount, empowering them to make significant contributions to their community and beyond.
+                To provide quality English and Quranic education from age 3.5, instilling strong moral values and essential skills through modern technology. We aim to prepare students for success in today's evolving society.
               </p>
             </div>
           </div>
