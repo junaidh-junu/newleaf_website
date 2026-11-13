@@ -1,493 +1,267 @@
 import React, { useState } from 'react';
+import { SITE } from '../../config/site';
+import { Mark, PageHero } from '../../components/ui/site';
+
+const EMPTY_FORM = {
+  name: '',
+  phone: '',
+  email: '',
+  child: '',
+  dob: '',
+  stage: 'Heavens Preschool',
+  message: '',
+};
+
+const STAGES = ['Heavens Preschool', 'Primary', 'Upper primary', 'High school', 'General question'];
+
+const STEPS = [
+  {
+    title: 'Enquire',
+    text: 'Send the form below or call us. We will answer your questions and agree a time to visit.',
+  },
+  {
+    title: 'Visit',
+    text: 'See the classrooms, meet the teachers and bring your child along for a short, friendly conversation.',
+  },
+  {
+    title: 'Enrol',
+    text: 'Complete the application with previous school records, if any. The office will confirm fees and documents.',
+  },
+];
+
+const FAQS = [
+  {
+    q: 'At what age can my child join?',
+    a: 'From age 3½, starting in Heavens Preschool. Older children can join New Leaf School at the stage that fits them, up to high school.',
+  },
+  {
+    q: 'What language is the school taught in?',
+    a: 'English is the medium of instruction for academic subjects. Quranic education runs alongside it every day.',
+  },
+  {
+    q: 'Is school transport available?',
+    a: 'Yes. The school runs its own transport with experienced drivers. Ask the office about the route nearest you.',
+  },
+  {
+    q: 'How is my child kept safe?',
+    a: 'The campus is covered by CCTV and supervised by trained staff, with first-aid facilities, filtered drinking water and child-friendly washrooms.',
+  },
+  {
+    q: 'What are the fees?',
+    a: 'The office will share the current fee structure for your child’s class when you enquire.',
+  },
+];
+
+const labelClass = 'text-[0.97rem] font-semibold';
+const asideHeading = 'text-[0.8125rem] font-bold uppercase tracking-[0.1em] text-zest';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: 'general',
-    message: '',
-    preferredContact: 'email'
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState('');
+  const [formData, setFormData] = useState(EMPTY_FORM);
+  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((current) => ({ ...current, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitMessage('');
-
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setStatus('sending');
     try {
-      // Netlify Forms handles form submission automatically when the form has the data-netlify attribute
-      // This is a fallback for additional processing if needed
       const response = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          'form-name': 'contact',
-          ...formData
-        })
+        body: new URLSearchParams({ 'form-name': 'contact', ...formData }).toString(),
       });
-
-      if (response.ok) {
-        setSubmitMessage('Thank you for your message! We\'ll get back to you within 24 hours.');
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          subject: 'general',
-          message: '',
-          preferredContact: 'email'
-        });
-      } else {
-        throw new Error('Form submission failed');
-      }
+      if (!response.ok) throw new Error('Form submission failed');
+      setFormData(EMPTY_FORM);
+      setStatus('sent');
     } catch (error) {
       console.error('Error submitting form:', error);
-      setSubmitMessage('Sorry, there was an error sending your message. Please try again or contact us directly.');
-    } finally {
-      setIsSubmitting(false);
+      setStatus('error');
     }
   };
 
-  const contactInfo = [
-    {
-      icon: '📞',
-      title: 'Phone',
-      details: '+91 9495065324',
-      subtext: 'Main Office: Mon-Sat, 9AM-4PM IST'
-    },
-    {
-      icon: '✉️',
-      title: 'Email',
-      details: 'newleafschoolpkd@gmail.com',
-      subtext: 'We respond within 24 hours'
-    },
-    {
-      icon: '📍',
-      title: 'Address',
-      details: 'New Leaf School, Vettukad, Puthucode (PO), Palakkad, Kerala - 678687',
-      subtext: 'Located in the heart of Puthucode'
-    },
-    {
-      icon: '🕰️',
-      title: 'Office Hours',
-      details: 'Monday - Saturday: 9:00 AM - 4:00 PM IST',
-      subtext: 'Closed on Sundays'
-    }
-  ];
-
-  const departments = [
-    {
-      name: 'Admissions & Enrollment',
-      email: 'newleafschoolpkd@gmail.com',
-      phone: '9495065324',
-      description: 'New student enrollment, school tours, admission requirements, and prospectus requests'
-    },
-    {
-      name: 'Academic Department',
-      email: 'newleafschoolpkd@gmail.com',
-      phone: '9495065324',
-      description: 'Curriculum questions, academic support, English & Quranic education programs'
-    },
-    {
-      name: 'Administration Office',
-      email: 'newleafschoolpkd@gmail.com',
-      phone: '9495065324',
-      description: 'General inquiries, fees, transportation, and administrative matters'
-    },
-    {
-      name: 'Technology & LMS Support',
-      email: 'newleafschoolpkd@gmail.com',
-      phone: '9495065324',
-      description: 'Smart classroom support, LMS access, ERP systems, and technical assistance'
-    }
-  ];
-
-  const faqs = [
-    {
-      question: 'What are your admission requirements?',
-      answer: 'We welcome students of all backgrounds. Requirements include completed application, previous school records, and a brief interview.'
-    },
-    {
-      question: 'Do you offer financial aid or scholarships?',
-      answer: 'Yes, we offer need-based financial aid and merit scholarships. Contact our Business Office for more information.'
-    },
-    {
-      question: 'What is your student-to-teacher ratio?',
-      answer: 'We maintain a 15:1 student-to-teacher ratio to ensure personalized attention for every student.'
-    },
-    {
-      question: 'Do you provide after-school care?',
-      answer: 'Yes, we offer after-school programs until 6:00 PM, including homework help, enrichment activities, and sports.'
-    },
-    {
-      question: 'How can I schedule a school tour?',
-      answer: 'You can schedule a tour by calling our Admissions Office or using the contact form below. Tours are available Monday through Friday.'
-    },
-    {
-      question: 'What safety measures do you have in place?',
-      answer: 'We have comprehensive safety protocols including secure entry systems, emergency procedures, and trained safety personnel.'
-    }
-  ];
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-teal-600 to-cyan-600 text-white py-20">
-        <div className="absolute inset-0 bg-black opacity-20"></div>
-        <div className="relative container mx-auto px-6 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">
-            Contact Us
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-            We're here to help and answer any questions you might have about New Leaf School
-          </p>
-          <div className="flex items-center justify-center space-x-4">
-            <div className="text-4xl">📞</div>
-            <div className="text-4xl">✉️</div>
-            <div className="text-4xl">📏</div>
-          </div>
-        </div>
-      </section>
+    <>
+      <PageHero
+        eyebrow="Admissions and contact"
+        title={
+          <>
+            Start with <Mark>a visit.</Mark>
+          </>
+        }
+      >
+        <p className="nl-lead">
+          Tell us about your child and when you would like to come. We reply within 24 hours, or you
+          can call the office directly.
+        </p>
+      </PageHero>
 
-      {/* Contact Information */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">Get In Touch</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Multiple ways to reach us - choose what works best for you
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {contactInfo.map((info, index) => (
-              <div key={index} className="text-center bg-gray-50 p-8 rounded-lg hover:shadow-lg transition-shadow">
-                <div className="text-4xl mb-4">{info.icon}</div>
-                <h3 className="text-xl font-bold text-gray-800 mb-2">{info.title}</h3>
-                <p className="text-gray-700 font-medium mb-2">{info.details}</p>
-                <p className="text-sm text-gray-500">{info.subtext}</p>
-              </div>
+      <section className="nl-pad py-14 lg:py-24">
+        <div className="nl-wrap flex flex-col gap-9">
+          <h2 className="nl-h2">How admission works.</h2>
+          <ol className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-5">
+            {STEPS.map((step, index) => (
+              <li key={step.title} className="flex flex-col gap-2 border-t-2 border-ink pt-5">
+                <span className="font-heading text-[2.75rem] font-extrabold leading-none text-leaf">
+                  {index + 1}
+                </span>
+                <h3 className="nl-h3">{step.title}</h3>
+                <p className="text-moss">{step.text}</p>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
-      {/* Contact Form */}
-      <section className="py-16">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Form */}
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              <h2 className="text-3xl font-bold text-gray-800 mb-6">Send us a Message</h2>
-              <p className="text-gray-600 mb-8">
-                Fill out the form below and we'll get back to you within 24 hours.
-              </p>
-              
-              <form 
-                name="contact" 
-                method="POST" 
-                data-netlify="true" 
+      <section id="enquire" className="nl-pad scroll-mt-24 pb-16 lg:pb-28">
+        <div className="nl-wrap flex flex-wrap gap-6">
+          <div className="min-w-0 flex-[999_1_520px] rounded-[28px] bg-paper p-6 lg:p-11">
+            {status === 'sent' ? (
+              <div role="status" className="flex flex-col items-start gap-4 py-6">
+                <h2 className="font-heading text-[2rem] font-extrabold leading-tight">
+                  Thank you. Your enquiry is with the office.
+                </h2>
+                <p className="nl-lead">
+                  We will call or email you within 24 hours, {SITE.officeDays}.
+                </p>
+                <button type="button" onClick={() => setStatus('idle')} className="nl-btn nl-btn-outline">
+                  Send another
+                </button>
+              </div>
+            ) : (
+              <form
+                name="contact"
+                method="POST"
+                data-netlify="true"
                 netlify-honeypot="bot-field"
                 onSubmit={handleSubmit}
+                className="flex flex-col gap-5"
               >
-                {/* Hidden field for Netlify */}
                 <input type="hidden" name="form-name" value="contact" />
-                
-                {/* Honeypot field for spam protection */}
                 <div className="hidden">
-                  <input name="bot-field" />
+                  <label>
+                    Leave this empty <input name="bot-field" tabIndex={-1} autoComplete="off" />
+                  </label>
                 </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                      placeholder="Your full name"
-                    />
+                <h2 className="font-heading text-[2rem] font-extrabold leading-tight">Admission enquiry</h2>
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-5">
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="f-name" className={labelClass}>Parent's name</label>
+                    <input id="f-name" name="name" type="text" required autoComplete="name" value={formData.name} onChange={handleChange} className="nl-field" />
                   </div>
-                  
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                      placeholder="your.email@example.com"
-                    />
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="f-phone" className={labelClass}>Phone number</label>
+                    <input id="f-phone" name="phone" type="tel" required autoComplete="tel" value={formData.phone} onChange={handleChange} className="nl-field" />
                   </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                      Phone Number
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="f-email" className={labelClass}>
+                      Email <span className="font-normal text-moss-light">(optional)</span>
                     </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                      placeholder="(555) 123-4567"
-                    />
+                    <input id="f-email" name="email" type="email" autoComplete="email" value={formData.email} onChange={handleChange} className="nl-field" />
                   </div>
-                  
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                      Subject *
-                    </label>
-                    <select
-                      id="subject"
-                      name="subject"
-                      required
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                    >
-                      <option value="general">General Inquiry</option>
-                      <option value="admissions">Admissions</option>
-                      <option value="academics">Academic Questions</option>
-                      <option value="tours">School Tour Request</option>
-                      <option value="support">Student Support</option>
-                      <option value="billing">Billing & Payments</option>
-                      <option value="other">Other</option>
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="f-child" className={labelClass}>Child's name</label>
+                    <input id="f-child" name="child" type="text" required value={formData.child} onChange={handleChange} className="nl-field" />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="f-dob" className={labelClass}>Child's date of birth</label>
+                    <input id="f-dob" name="dob" type="date" required value={formData.dob} onChange={handleChange} className="nl-field" />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="f-stage" className={labelClass}>Admission for</label>
+                    <select id="f-stage" name="stage" value={formData.stage} onChange={handleChange} className="nl-field">
+                      {STAGES.map((stage) => (
+                        <option key={stage}>{stage}</option>
+                      ))}
                     </select>
                   </div>
                 </div>
-
-                <div className="mt-6">
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                    Message *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={6}
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                    placeholder="Please tell us how we can help you..."
-                  />
+                <div className="flex flex-col gap-1.5">
+                  <label htmlFor="f-msg" className={labelClass}>Your message</label>
+                  <textarea id="f-msg" name="message" rows={5} required value={formData.message} onChange={handleChange} className="nl-field resize-y py-3.5 leading-normal" />
+                  <span className="text-[0.9375rem] text-moss-light">
+                    A day that suits you for a visit is helpful.
+                  </span>
                 </div>
-
-                <div className="mt-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-3">
-                    Preferred Contact Method
-                  </label>
-                  <div className="flex space-x-6">
-                    <label className="flex items-center">
-                      <input
-                        type="radio"
-                        name="preferredContact"
-                        value="email"
-                        checked={formData.preferredContact === 'email'}
-                        onChange={handleInputChange}
-                        className="mr-2 text-teal-600"
-                      />
-                      Email
-                    </label>
-                    <label className="flex items-center">
-                      <input
-                        type="radio"
-                        name="preferredContact"
-                        value="phone"
-                        checked={formData.preferredContact === 'phone'}
-                        onChange={handleInputChange}
-                        className="mr-2 text-teal-600"
-                      />
-                      Phone
-                    </label>
-                  </div>
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`w-full mt-8 py-4 px-6 rounded-lg font-semibold transition-colors ${
-                    isSubmitting
-                      ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
-                      : 'bg-teal-600 text-white hover:bg-teal-700'
-                  }`}
-                >
-                  {isSubmitting ? 'Sending Message...' : 'Send Message'}
-                </button>
-
-                {submitMessage && (
-                  <div className={`mt-4 p-4 rounded-lg ${
-                    submitMessage.includes('Thank you') 
-                      ? 'bg-green-100 text-green-800' 
-                      : 'bg-red-100 text-red-800'
-                  }`}>
-                    {submitMessage}
-                  </div>
-                )}
-              </form>
-            </div>
-
-            {/* Map and Additional Info */}
-            <div>
-              {/* Map Placeholder */}
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
-                <div className="h-64 bg-gradient-to-br from-teal-100 to-cyan-100 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-6xl mb-4">🗺️</div>
-                    <p className="text-gray-600">
-                      Interactive map would be embedded here<br />
-                      (Google Maps, MapBox, etc.)
-                    </p>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">Visit Our Campus</h3>
-                  <p className="text-gray-600 mb-4">
-                    Vettukad, Puthucode (PO)<br />
-                    Palakkad, Kerala, India - 678687
+                {status === 'error' && (
+                  <p role="alert" className="rounded-xl border-[1.5px] border-[#A4262C] bg-white px-4 py-3 text-[#8A1C22]">
+                    Your enquiry could not be sent. Please try again, or call {SITE.phoneDisplay}.
                   </p>
-                  <div className="space-y-2">
-                    <a 
-                      href="https://maps.app.goo.gl/NcFAqYgNrxWtUiZa7" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-teal-600 hover:text-teal-800 font-medium block"
-                    >
-                      Get Directions →
-                    </a>
-                    <a 
-                      href="https://share.google/PF8PCOunv7kNpPihA" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-teal-600 hover:text-teal-800 font-medium block"
-                    >
-                      View School Details →
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Social Media & Additional Info */}
-              <div className="bg-primary-50 border border-primary-200 rounded-lg p-6">
-                <h3 className="text-lg font-bold text-primary-800 mb-2">Stay Connected</h3>
-                <p className="text-primary-700 mb-4">
-                  Follow us on social media for updates and announcements:
-                </p>
-                <div className="space-y-2">
-                  <div className="flex items-center text-primary-600">
-                    <span className="mr-2">📱</span>
-                    <span className="text-primary-700">Instagram: @newleafacademy_2016</span>
-                  </div>
-                  <div className="flex items-center text-primary-600">
-                    <span className="mr-2">📞</span>
-                    <span className="text-primary-700">Emergency: 9495065324</span>
-                  </div>
-                </div>
-                <p className="text-primary-600 text-sm mt-3">
-                  Office hours: Monday - Saturday, 9:00 AM to 4:00 PM IST
-                </p>
-              </div>
-            </div>
+                )}
+                <button type="submit" disabled={status === 'sending'} className="nl-btn nl-btn-green self-start disabled:opacity-60">
+                  {status === 'sending' ? 'Sending…' : 'Send enquiry'}
+                </button>
+              </form>
+            )}
           </div>
+
+          <aside className="flex flex-[1_1_320px] flex-col gap-7 rounded-[28px] bg-ink p-6 text-white lg:p-11">
+            <div className="flex flex-col items-start gap-1.5">
+              <h2 className={asideHeading}>Call</h2>
+              <a href={SITE.phoneHref} className="font-heading text-3xl font-extrabold leading-tight hover:text-zest">
+                {SITE.phoneDisplay}
+              </a>
+              <p className="text-mist-dim">
+                {SITE.officeDays}, {SITE.officeHours}. Closed Sundays.
+              </p>
+              <a href={SITE.whatsappHref} className="nl-btn nl-btn-white mt-2.5 min-h-[48px]">
+                Chat on WhatsApp
+              </a>
+            </div>
+            <div className="flex flex-col items-start gap-1.5">
+              <h2 className={asideHeading}>Email</h2>
+              <a href={`mailto:${SITE.email}`} className="font-semibold underline [overflow-wrap:anywhere] hover:text-zest">
+                {SITE.email}
+              </a>
+            </div>
+            <div className="flex flex-col items-start gap-1.5">
+              <h2 className={asideHeading}>Visit</h2>
+              <p className="text-lg leading-normal">
+                New Leaf School
+                <br />
+                {SITE.addressLines[0]}
+                <br />
+                {SITE.addressLines[1]}
+              </p>
+              <a href={SITE.mapsHref} target="_blank" rel="noreferrer" className="nl-btn nl-btn-zest mt-2.5 min-h-[48px]">
+                Get directions
+              </a>
+            </div>
+            <div className="flex flex-col items-start gap-1.5">
+              <h2 className={asideHeading}>Follow</h2>
+              <a href={SITE.instagramHref} className="text-lg font-semibold underline hover:text-zest">
+                Instagram {SITE.instagramHandle}
+              </a>
+            </div>
+          </aside>
         </div>
       </section>
 
-      {/* Departments */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">Department Contacts</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Reach out to the right department for faster assistance
-            </p>
+      <section className="nl-sec bg-paper">
+        <div className="nl-wrap flex flex-wrap gap-x-20 gap-y-10">
+          <div className="flex max-w-[400px] flex-[1_1_300px] flex-col gap-4">
+            <h2 className="nl-h2">Questions parents ask.</h2>
+            <p className="nl-lead">If yours is not here, call the office.</p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {departments.map((dept, index) => (
-              <div key={index} className="bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-shadow">
-                <h3 className="text-xl font-bold text-gray-800 mb-3">{dept.name}</h3>
-                <p className="text-gray-600 mb-4">{dept.description}</p>
-                <div className="space-y-2">
-                  <div className="flex items-center text-teal-600">
-                    <span className="mr-2">✉️</span>
-                    <a href={`mailto:${dept.email}`} className="hover:underline">{dept.email}</a>
-                  </div>
-                  <div className="flex items-center text-teal-600">
-                    <span className="mr-2">📞</span>
-                    <a href={`tel:${dept.phone}`} className="hover:underline">{dept.phone}</a>
-                  </div>
-                </div>
-              </div>
+          <div className="flex min-w-0 flex-[999_1_480px] flex-col border-b border-rule">
+            {FAQS.map((faq, index) => (
+              <details
+                key={faq.q}
+                open={index === 0}
+                className={`py-2 ${index === 0 ? 'border-t-2 border-ink' : 'border-t border-rule'}`}
+              >
+                <summary className="flex min-h-[52px] cursor-pointer items-center font-heading text-[1.375rem] font-bold">
+                  {faq.q}
+                </summary>
+                <p className="mb-4 max-w-[640px] text-moss">{faq.a}</p>
+              </details>
             ))}
           </div>
         </div>
       </section>
-
-      {/* FAQ Section */}
-      <section className="py-16 bg-gray-100">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">Frequently Asked Questions</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Quick answers to common questions about New Leaf School
-            </p>
-          </div>
-          
-          <div className="max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {faqs.map((faq, index) => (
-                <div key={index} className="bg-white rounded-lg p-6 shadow-md">
-                  <h3 className="text-lg font-bold text-gray-800 mb-3">{faq.question}</h3>
-                  <p className="text-gray-600">{faq.answer}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="py-16 bg-teal-600 text-white">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Join Our Community?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Take the next step in your child's educational journey. Schedule a tour or apply today.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-teal-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-              Schedule a Tour
-            </button>
-            <button className="border-2 border-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-teal-600 transition-colors">
-              Apply Now
-            </button>
-          </div>
-        </div>
-      </section>
-    </div>
+    </>
   );
 };
 

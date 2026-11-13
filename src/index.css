@@ -336,3 +336,34 @@
     box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
   }
 }
+
+
+/* Public site (2026 redesign). Scoped under .nl so admin and login keep their styles. */
+@layer base {
+  .nl h1, .nl h2, .nl h3, .nl h4 {
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    color: inherit;
+  }
+}
+
+@layer components {
+  .nl-wrap { @apply mx-auto w-full max-w-[1240px]; }
+  .nl-pad { @apply px-5 sm:px-8 lg:px-20; }
+  .nl-sec { @apply px-5 py-16 sm:px-8 lg:px-20 lg:py-28; }
+  .nl-eyebrow { @apply text-sm font-bold uppercase tracking-[0.1em]; }
+  .nl-h1 { @apply font-heading text-[clamp(2.5rem,5.6vw,4.75rem)] font-extrabold leading-none tracking-[-0.03em]; }
+  .nl-h2 { @apply font-heading text-[clamp(2rem,4vw,3.25rem)] font-extrabold leading-[1.05] tracking-[-0.02em]; }
+  .nl-h3 { @apply font-heading text-2xl font-extrabold leading-tight tracking-normal; }
+  .nl-lead { @apply text-[1.1875rem] leading-[1.55] text-moss; }
+  .nl-btn { @apply inline-flex min-h-[54px] items-center justify-center rounded-full px-7 text-[1.0625rem] font-bold no-underline transition-colors; }
+  .nl-btn-green { @apply bg-leaf text-white hover:bg-ink; }
+  .nl-btn-zest { @apply bg-zest text-ink hover:bg-white; }
+  .nl-btn-white { @apply bg-white text-ink hover:bg-zest; }
+  .nl-btn-outline { @apply border-2 border-ink text-ink hover:bg-ink hover:text-white; }
+  .nl-btn-outline-white { @apply border-2 border-white text-white hover:bg-white hover:text-ink; }
+  .nl-link { @apply inline-flex min-h-[44px] items-center text-[1.0625rem] font-bold text-leaf hover:text-ink; }
+  .nl-chip { @apply rounded-full px-3.5 py-1.5 text-[0.9375rem] font-semibold; }
+  .nl-field { @apply min-h-[52px] w-full rounded-xl border-[1.5px] border-[#6B8273] bg-white px-4 text-[1.0625rem] text-ink focus:outline focus:outline-[3px] focus:outline-offset-2 focus:outline-leaf; }
+  .nl a:focus-visible, .nl button:focus-visible, .nl summary:focus-visible { @apply outline outline-[3px] outline-offset-2 outline-leaf; }
+}

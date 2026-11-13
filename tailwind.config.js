@@ -53,6 +53,14 @@ export default {
           900: '#171717',
           950: '#0a0a0a',
         },
+        // Public site palette (2026 redesign), taken from the school crest
+        ink: '#0C2A1C',
+        leaf: { DEFAULT: '#06753A', brand: '#048C45', deep: '#153A28', line: '#2A4A39' },
+        zest: { DEFAULT: '#B9DB5C', soft: '#DCEBB4' },
+        paper: '#F1F6EA',
+        rule: { DEFAULT: '#C9D6C2', soft: '#DDE7D6' },
+        moss: { DEFAULT: '#33483C', light: '#4E6156' },
+        mist: { DEFAULT: '#DCE8DC', dim: '#C9D9CC' },
         glass: {
           light: 'rgba(255, 255, 255, 0.05)',
           medium: 'rgba(255, 255, 255, 0.1)',
@@ -62,6 +70,8 @@ export default {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         display: ['Inter', 'system-ui', 'sans-serif'],
+        heading: ['"Bricolage Grotesque"', 'Figtree', 'system-ui', 'sans-serif'],
+        body: ['Figtree', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         'xs': ['0.75rem', { lineHeight: '1rem' }],

@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { getLogoConfig } from '../../config/assets';
+import { SCHOOL_LOGOS } from '../../config/assets';
+import { NAV_ITEMS } from '../../config/site';
+
+const linkClass = ({ isActive }) =>
+  `inline-flex min-h-[44px] items-center rounded-full px-3.5 text-[0.97rem] font-semibold transition-colors ${
+    isActive ? 'bg-zest-soft text-ink' : 'text-moss hover:bg-paper hover:text-ink'
+  }`;
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   const handleLogout = async () => {
     try {
@@ -17,194 +28,72 @@ const Header = () => {
     }
   };
 
-  const publicNavItems = [
-    { name: 'Home', path: '/' },
-    { name: 'About Us', path: '/about' },
-    { name: 'Academics', path: '/academics' },
-    { name: 'Achievements', path: '/achievements' },
-    { name: 'Gallery', path: '/gallery' },
-    { name: 'Events', path: '/events' },
-    { name: 'Contact', path: '/contact' },
-  ];
-
-  const adminNavItems = [
-    { name: 'Dashboard', path: '/admin' },
-    { name: 'Manage Posts', path: '/admin/posts' },
-    { name: 'Manage Events', path: '/admin/events' },
-    { name: 'Manage Gallery', path: '/admin/gallery' },
-  ];
-
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-2xl border-b border-white/20 shadow-glass">
-      <nav className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="group flex items-center space-x-3">
-            <div className="relative">
-              <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-neon transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 overflow-hidden p-2">
-                <img 
-                  src={getLogoConfig('HEADER').src}
-                  alt={getLogoConfig('HEADER').alt}
-                  className={getLogoConfig('HEADER').className}
-                />
-              </div>
-              <div className="absolute -inset-1 bg-gradient-to-br from-primary-500 to-accent-500 rounded-2xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
-            </div>
-            <div className="flex flex-col">
-              <div className="text-xl font-bold gradient-text transition-all duration-300 group-hover:scale-105">
-                New Leaf School
-              </div>
-              <div className="text-xs text-neutral-500 font-medium tracking-wide -mt-1">
-                & Heavens Preschool
-              </div>
-            </div>
-          </Link>
+    <header className="nl-pad sticky top-0 z-40 border-b border-rule-soft bg-white py-3">
+      <div className="nl-wrap flex flex-wrap items-center justify-between gap-x-8 gap-y-2">
+        <Link to="/" className="flex min-h-[56px] items-center gap-3 text-ink">
+          <img
+            src={SCHOOL_LOGOS.EMBLEM}
+            alt="New Leaf School crest"
+            className="h-14 w-[49px] object-contain"
+          />
+          <span className="flex flex-col leading-[1.1]">
+            <span className="font-heading text-xl font-extrabold tracking-[-0.01em]">
+              New Leaf School
+            </span>
+            <span className="text-[0.78rem] font-semibold tracking-[0.04em] text-moss-light">
+              For Quran and English
+            </span>
+          </span>
+        </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-2">
-            {publicNavItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className="nav-link relative px-4 py-2 rounded-xl text-neutral-700 hover:text-primary-600 font-medium transition-all duration-300 hover:bg-white/20 hover:backdrop-blur-sm group"
-              >
-                {item.name}
-                <span className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-full"></span>
-              </Link>
-            ))}
-            
-            {user ? (
-              <div className="relative group ml-4">
-                <button className="flex items-center space-x-2 px-4 py-2 rounded-2xl bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold transition-all duration-300 hover:scale-105 hover:shadow-neon group-hover:from-primary-600 group-hover:to-accent-600">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                  <span>Admin</span>
-                  <svg className="w-4 h-4 transform group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                <div className="absolute right-0 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 pointer-events-none group-hover:pointer-events-auto z-50">
-                  <div className="w-56 bg-white/95 backdrop-blur-xl border border-gray-200/80 rounded-2xl shadow-xl p-2 animate-slide-down">
-                    <div className="space-y-1">
-                      {adminNavItems.map((item, index) => (
-                        <Link
-                          key={item.path}
-                          to={item.path}
-                          className="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50/80 rounded-xl transition-all duration-200 group/item"
-                        >
-                          <div className="w-2 h-2 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full opacity-0 group-hover/item:opacity-100 transition-opacity duration-200"></div>
-                          <span className="font-medium">{item.name}</span>
-                        </Link>
-                      ))}
-                      <div className="border-t border-gray-200 my-2"></div>
-                      <button
-                        onClick={handleLogout}
-                        className="flex items-center space-x-3 w-full px-4 py-3 text-red-600 hover:text-red-700 hover:bg-red-50/80 rounded-xl transition-all duration-200 group/item"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                        </svg>
-                        <span className="font-medium">Logout</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <Link
-                to="/login"
-                className="ml-4 px-6 py-2 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-2xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-neon hover:from-primary-600 hover:to-accent-600 active:scale-95"
-              >
-                Login
-              </Link>
-            )}
-          </div>
+        <button
+          type="button"
+          className="inline-flex h-12 w-12 items-center justify-center rounded-full border-2 border-ink text-ink lg:hidden"
+          aria-expanded={isMenuOpen}
+          aria-controls="site-nav"
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          onClick={() => setIsMenuOpen((open) => !open)}
+        >
+          <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+            {isMenuOpen ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+          </svg>
+        </button>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-neutral-700 hover:bg-white/20 hover:text-primary-600 transition-all duration-300 hover:scale-105 active:scale-95"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+        <nav
+          id="site-nav"
+          aria-label="Main"
+          className={`${
+            isMenuOpen ? 'flex' : 'hidden'
+          } w-full flex-col gap-1 pb-3 lg:flex lg:w-auto lg:flex-row lg:items-center lg:gap-1 lg:pb-0`}
+        >
+          {NAV_ITEMS.map((item) => (
+            <NavLink key={item.path} to={item.path} end={item.path === '/'} className={linkClass}>
+              {item.name}
+            </NavLink>
+          ))}
+          {user && (
+            <>
+              <NavLink to="/admin" className={linkClass}>
+                Admin
+              </NavLink>
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="inline-flex min-h-[44px] items-center rounded-full px-3.5 text-left text-[0.97rem] font-semibold text-moss hover:bg-paper hover:text-ink"
+              >
+                Log out
+              </button>
+            </>
+          )}
+          <Link
+            to="/contact"
+            className="mt-2 inline-flex min-h-[44px] items-center justify-center rounded-full bg-leaf px-5 text-[0.97rem] font-bold text-white transition-colors hover:bg-ink lg:ml-2 lg:mt-0"
           >
-            <svg className={`w-5 h-5 transition-transform duration-300 ${isMenuOpen ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {isMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden mt-6 animate-slide-down">
-            <div className="bg-white/95 backdrop-blur-xl border border-gray-200/80 rounded-2xl shadow-xl p-4 mx-2">
-              <div className="space-y-2">
-                {publicNavItems.map((item, index) => (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    className="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50/80 rounded-xl transition-all duration-200 group animate-slide-in-left"
-                    style={{ animationDelay: `${index * 50}ms` }}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <div className="w-2 h-2 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-                    <span className="font-medium">{item.name}</span>
-                  </Link>
-                ))}
-                
-                {user ? (
-                  <div className="pt-4">
-                    <div className="border-t border-gray-200 mb-4"></div>
-                    <div className="space-y-2">
-                      {adminNavItems.map((item, index) => (
-                        <Link
-                          key={item.path}
-                          to={item.path}
-                          className="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50/80 rounded-xl transition-all duration-200 group"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          <svg className="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                          <span className="font-medium">{item.name}</span>
-                        </Link>
-                      ))}
-                      <button
-                        onClick={() => {
-                          handleLogout();
-                          setIsMenuOpen(false);
-                        }}
-                        className="flex items-center space-x-3 w-full px-4 py-3 text-red-600 hover:text-red-700 hover:bg-red-50/80 rounded-xl transition-all duration-200 group"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                        </svg>
-                        <span className="font-medium">Logout</span>
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="pt-4">
-                    <div className="border-t border-gray-200 mb-4"></div>
-                    <Link
-                      to="/login"
-                      className="flex items-center justify-center space-x-2 w-full px-4 py-3 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-2xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-neon active:scale-95"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-                      </svg>
-                      <span>Login</span>
-                    </Link>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
-      </nav>
+            Book a visit
+          </Link>
+        </nav>
+      </div>
     </header>
   );
 };
