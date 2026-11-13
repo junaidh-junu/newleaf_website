@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Layout from './components/layout/Layout';
 
@@ -7,9 +7,8 @@ import Layout from './components/layout/Layout';
 import Home from './pages/public/Home';
 import About from './pages/public/About';
 import Academics from './pages/public/Academics';
-import Achievements from './pages/public/Achievements';
-import Gallery from './pages/public/Gallery';
-import Events from './pages/public/Events';
+import SchoolLife from './pages/public/SchoolLife';
+import Parents from './pages/public/Parents';
 import Contact from './pages/public/Contact';
 import Login from './pages/public/Login';
 
@@ -38,9 +37,12 @@ function App() {
               <Route index element={<Home />} />
               <Route path="about" element={<About />} />
               <Route path="academics" element={<Academics />} />
-              <Route path="achievements" element={<Achievements />} />
-              <Route path="gallery" element={<ErrorBoundary showDetails={true}><Gallery /></ErrorBoundary>} />
-              <Route path="events" element={<ErrorBoundary showDetails={true}><Events /></ErrorBoundary>} />
+              <Route path="school-life" element={<ErrorBoundary showDetails={true}><SchoolLife /></ErrorBoundary>} />
+              <Route path="parents" element={<Parents />} />
+              {/* Old URLs now live on the School life page */}
+              <Route path="achievements" element={<Navigate to="/school-life#news" replace />} />
+              <Route path="gallery" element={<Navigate to="/school-life#gallery" replace />} />
+              <Route path="events" element={<Navigate to="/school-life#events" replace />} />
               <Route path="contact" element={<Contact />} />
             </Route>
             

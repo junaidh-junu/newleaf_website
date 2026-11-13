@@ -1,362 +1,191 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { SCHOOL } from '../../config/school';
+import { Action, CtaBand, Mark, PageHero, Row, SplitSection } from '../../components/ui/site';
+
+const STAGES = [
+  {
+    name: 'Heavens Preschool',
+    range: 'From age 3½',
+    text: 'Play-based learning, creative arts, first letters and numbers, and first words of the Quran.',
+  },
+  {
+    name: 'Primary',
+    range: SCHOOL.grades.primary,
+    text: 'Strong foundations in reading, writing and number, with curiosity and good habits built in.',
+  },
+  {
+    name: 'Upper primary',
+    range: SCHOOL.grades.upperPrimary,
+    text: 'Subjects deepen, independent study begins, and students take on more responsibility.',
+  },
+  {
+    name: 'High school',
+    range: SCHOOL.grades.highSchool,
+    text: 'Rigorous coursework and exam preparation for whatever comes next.',
+  },
+];
+
+const ACTIVITIES = [
+  ['Karate', 'bg-[#FFF3D6]'],
+  ['Abacus', 'bg-zest-soft'],
+  ['Art training', 'bg-[#FBDDEC]'],
+  ['Sports and games', 'bg-[#DFE3F3]'],
+  ["Students' garden", 'bg-zest-soft'],
+  ['Library hours', 'bg-[#FFF3D6]'],
+];
+
+const quranItems = ['Quran reading and recitation', 'Islamic studies and moral values', SCHOOL.hifz].filter(Boolean);
+
+const englishItems = [
+  'English language and literature',
+  'Mathematics, science and social studies',
+  'Computer education in the lab',
+  SCHOOL.board,
+].filter(Boolean);
 
 const Academics = () => {
-  const [activeTab, setActiveTab] = useState('elementary');
-
-  const programs = {
-    elementary: {
-      title: "Kindergarten (K)",
-      description: "Building strong foundations in core subjects while fostering curiosity and creativity.",
-      subjects: [
-        {
-          name: "Language Arts",
-          icon: "📚",
-          description: "Reading, writing, grammar, and vocabulary development through engaging literature and interactive activities.",
-          highlights: ["Phonics and Reading Comprehension", "Creative Writing Workshops", "Literature Circles", "Spelling and Vocabulary Building"]
-        },
-        {
-          name: "Mathematics",
-          icon: "🔢",
-          description: "Number sense, problem-solving, and mathematical reasoning using hands-on manipulatives and real-world applications.",
-          highlights: ["Number Operations", "Geometry and Measurement", "Data Analysis", "Mathematical Problem Solving"]
-        },
-        {
-          name: "Science",
-          icon: "🔬",
-          description: "Hands-on exploration of life, physical, and earth sciences through experiments and observation.",
-          highlights: ["Life Science Explorations", "Physical Science Experiments", "Earth and Space Studies", "Scientific Method Practice"]
-        },
-        {
-          name: "Social Studies",
-          icon: "🌍",
-          description: "Understanding communities, cultures, history, and geography through interactive projects.",
-          highlights: ["Community Helpers", "World Cultures", "American History", "Geography Skills"]
-        }
-      ]
-    },
-    middle: {
-      title: "Middle School (2-7)",
-      description: "Challenging curriculum that prepares students for high school while developing critical thinking skills.",
-      subjects: [
-        {
-          name: "English Language Arts",
-          icon: "✍️",
-          description: "Advanced reading comprehension, literary analysis, and persuasive writing skills.",
-          highlights: ["Literary Analysis", "Research Writing", "Public Speaking", "Media Literacy"]
-        },
-        {
-          name: "Mathematics",
-          icon: "📊",
-          description: "Pre-algebra, algebra concepts, and advanced problem-solving strategies.",
-          highlights: ["Pre-Algebra", "Geometry Foundations", "Statistics and Probability", "Mathematical Modeling"]
-        },
-        {
-          name: "Science",
-          icon: "⚗️",
-          description: "Biology, chemistry, physics, and environmental science with laboratory investigations.",
-          highlights: ["Life Science Research", "Chemistry Basics", "Physics Principles", "Environmental Studies"]
-        },
-        {
-          name: "Social Studies",
-          icon: "🏛️",
-          description: "World history, civics, and current events analysis with emphasis on critical thinking.",
-          highlights: ["World History", "Civics and Government", "Current Events", "Historical Thinking Skills"]
-        }
-      ]
-    }
-  };
-
-  const specialPrograms = [
-    {
-      title: "STEM Education",
-      icon: "🚀",
-      description: "Integrated Science, Technology, Engineering, and Mathematics program with hands-on projects and robotics.",
-      features: ["Robotics Club", "Coding Bootcamps", "Science Fair Participation", "Engineering Challenges"]
-    },
-    {
-      title: "Arts Integration",
-      icon: "🎨",
-      description: "Comprehensive arts program including visual arts, music, drama, and creative expression.",
-      features: ["Visual Arts Studio", "Music Ensembles", "Drama Productions", "Creative Writing"]
-    },
-    {
-      title: "Physical Education",
-      icon: "⚽",
-      description: "Comprehensive physical education program promoting health, fitness, and teamwork.",
-      features: ["Team Sports", "Individual Fitness", "Health Education", "Outdoor Activities"]
-    },
-    {
-      title: "Foreign Language",
-      icon: "🌐",
-      description: "Spanish and French language instruction developing communication skills and cultural awareness.",
-      features: ["Conversational Practice", "Cultural Studies", "Grammar and Vocabulary", "Language Immersion Days"]
-    }
-  ];
-
-  const extracurriculars = [
-    { name: "Student Government", category: "Leadership" },
-    { name: "Math Olympiad", category: "Academic" },
-    { name: "Science Fair Club", category: "Academic" },
-    { name: "Debate Team", category: "Communication" },
-    { name: "Robotics Club", category: "STEM" },
-    { name: "Art Club", category: "Creative" },
-    { name: "Music Band", category: "Creative" },
-    { name: "Drama Club", category: "Creative" },
-    { name: "Soccer Team", category: "Sports" },
-    { name: "Basketball Team", category: "Sports" },
-    { name: "Chess Club", category: "Strategy" },
-    { name: "Environmental Club", category: "Service" }
-  ];
-
-  const teachingPhilosophy = [
-    {
-      title: "Student-Centered Learning",
-      description: "Every lesson is designed around student needs, interests, and learning styles.",
-      icon: "👨‍🎓"
-    },
-    {
-      title: "Hands-On Approach",
-      description: "Learning through doing, experimenting, and real-world application of concepts.",
-      icon: "🤲"
-    },
-    {
-      title: "Technology Integration",
-      description: "Modern technology tools enhance learning and prepare students for the digital world.",
-      icon: "💻"
-    },
-    {
-      title: "Collaborative Environment",
-      description: "Group projects and peer learning foster teamwork and communication skills.",
-      icon: "🤝"
-    }
-  ];
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20">
-        <div className="absolute inset-0 bg-black opacity-20"></div>
-        <div className="relative container mx-auto px-6 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">
-            Academic Excellence
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-            Comprehensive curriculum designed to challenge, inspire, and prepare students for success
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={() => setActiveTab('elementary')}
-              className={`px-6 py-3 rounded-lg font-semibold transition-colors ${
-                activeTab === 'elementary' ? 'bg-white text-blue-600' : 'bg-blue-700 hover:bg-blue-800'
-              }`}
-            >
-              Kindergarten (K)
-            </button>
-            <button
-              onClick={() => setActiveTab('middle')}
-              className={`px-6 py-3 rounded-lg font-semibold transition-colors ${
-                activeTab === 'middle' ? 'bg-white text-blue-600' : 'bg-blue-700 hover:bg-blue-800'
-              }`}
-            >
-              Middle School (2-7)
-            </button>
-          </div>
+    <>
+      <PageHero
+        eyebrow="Academics"
+        title={
+          <>
+            Two strands of learning, <Mark>woven into one day.</Mark>
+          </>
+        }
+      >
+        <p className="nl-lead">
+          Every student follows an English-medium curriculum and a Quranic curriculum together, from
+          the first year of preschool to the last year of high school.
+        </p>
+      </PageHero>
+
+      <section className="nl-sec">
+        <div className="nl-wrap grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6">
+          <article className="flex flex-col gap-4 rounded-[28px] bg-ink p-6 text-white lg:p-11">
+            <p className="nl-eyebrow text-zest">Strand one</p>
+            <h2 className="font-heading text-[clamp(1.875rem,3.4vw,2.75rem)] font-extrabold leading-[1.05]">
+              Quranic education
+            </h2>
+            <p className="text-mist">
+              Taught in dedicated prayer areas, with time set aside in the timetable every day.
+              Students learn to read, understand and live by what they study.
+            </p>
+            <ul className="mt-2 flex flex-col">
+              {quranItems.map((item) => (
+                <li key={item} className="border-t border-leaf-line py-3">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </article>
+          <article className="flex flex-col gap-4 rounded-[28px] bg-zest-soft p-6 lg:p-11">
+            <p className="nl-eyebrow text-[#0C5A2E]">Strand two</p>
+            <h2 className="font-heading text-[clamp(1.875rem,3.4vw,2.75rem)] font-extrabold leading-[1.05]">
+              English-medium academics
+            </h2>
+            <p className="text-[#1F3A2B]">
+              All core subjects are taught in English in smart classrooms, with lessons, homework
+              and progress tracked on the school's learning management system.
+            </p>
+            <ul className="mt-2 flex flex-col">
+              {englishItems.map((item) => (
+                <li key={item} className="border-t border-[#B5CC85] py-3">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </article>
         </div>
       </section>
 
-      {/* Academic Programs */}
-      <section className="py-16">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">{programs[activeTab].title}</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              {programs[activeTab].description}
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {programs[activeTab].subjects.map((subject, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="p-8">
-                  <div className="flex items-center mb-6">
-                    <div className="text-4xl mr-4">{subject.icon}</div>
-                    <h3 className="text-2xl font-bold text-gray-800">{subject.name}</h3>
-                  </div>
-                  <p className="text-gray-600 mb-6 leading-relaxed">{subject.description}</p>
-                  <div className="space-y-2">
-                    <h4 className="font-semibold text-gray-800 mb-3">Key Learning Areas:</h4>
-                    {subject.highlights.map((highlight, idx) => (
-                      <div key={idx} className="flex items-center">
-                        <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
-                        <span className="text-gray-600">{highlight}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+      {SCHOOL.daySchedule.length > 0 && (
+        <SplitSection
+          className="!pt-0"
+          title="A day at New Leaf."
+          lead="How the two strands fit into one school day."
+        >
+          <ol className="flex flex-col border-b border-rule">
+            {SCHOOL.daySchedule.map((slot, index) => (
+              <li
+                key={`${slot.time}-${slot.label}`}
+                className={`flex flex-wrap gap-x-8 gap-y-1 py-[18px] ${
+                  index === 0 ? 'border-t-2 border-ink' : 'border-t border-rule'
+                }`}
+              >
+                <span className="flex-[0_0_120px] font-bold text-leaf">{slot.time}</span>
+                <strong className="flex-[1_1_280px]">{slot.label}</strong>
+              </li>
             ))}
-          </div>
-        </div>
-      </section>
+          </ol>
+        </SplitSection>
+      )}
 
-      {/* Special Programs */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">Special Programs</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Enhanced learning opportunities that go beyond traditional academics
-            </p>
+      <section className="nl-sec !pt-0">
+        <div className="nl-wrap flex flex-col gap-11">
+          <div className="flex max-w-[680px] flex-col gap-3">
+            <h2 className="nl-h2">The journey, stage by stage.</h2>
+            <p className="nl-lead">A child can join at age 3½ and stay with us all the way through.</p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {specialPrograms.map((program, index) => (
-              <div key={index} className="bg-gray-50 rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
-                <div className="text-5xl mb-4">{program.icon}</div>
-                <h3 className="text-xl font-bold text-gray-800 mb-4">{program.title}</h3>
-                <p className="text-gray-600 mb-6 text-sm leading-relaxed">{program.description}</p>
-                <div className="space-y-2">
-                  {program.features.map((feature, idx) => (
-                    <div key={idx} className="text-sm text-gray-500 bg-white px-3 py-1 rounded-full">
-                      {feature}
-                    </div>
-                  ))}
-                </div>
-              </div>
+          <ol className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-5">
+            {STAGES.map((stage, index) => (
+              <li key={stage.name} className="flex flex-col gap-2.5 rounded-3xl border border-rule-soft p-7">
+                <span className="font-heading text-[2.75rem] font-extrabold leading-none text-leaf">
+                  {index + 1}
+                </span>
+                <h3 className="nl-h3">{stage.name}</h3>
+                {stage.range && <p className="font-semibold text-moss-light">{stage.range}</p>}
+                <p className="text-moss">{stage.text}</p>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
-      {/* Teaching Philosophy */}
-      <section className="py-16 bg-gradient-to-r from-blue-50 to-purple-50">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">Our Teaching Philosophy</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We believe in creating engaging, inclusive, and innovative learning experiences
-            </p>
+      <SplitSection
+        className="bg-paper"
+        title="How progress is tracked."
+        lead="No child should fall behind unnoticed, and no parent should have to guess."
+      >
+        <Row title="Continuous assessment" wide first>
+          Regular, low-pressure checks through the term show where each student stands and what
+          needs another look.
+        </Row>
+        <Row title="Parents in the loop" wide>
+          Progress reports and parent meetings, backed by the LMS and ERP, keep families informed
+          through the year.
+        </Row>
+        <Row title="Individual support" wide>
+          Teachers know each child's talents and gaps, and plan extra help or extra stretch
+          accordingly.
+        </Row>
+      </SplitSection>
+
+      <section className="nl-sec">
+        <div className="nl-wrap flex flex-col gap-9">
+          <div className="flex max-w-[680px] flex-col gap-3">
+            <h2 className="nl-h2">Beyond the timetable.</h2>
+            <p className="nl-lead">Part of every week is spent away from the desk.</p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {teachingPhilosophy.map((philosophy, index) => (
-              <div key={index} className="text-center">
-                <div className="text-6xl mb-4">{philosophy.icon}</div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3">{philosophy.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{philosophy.description}</p>
-              </div>
+          <ul className="flex flex-wrap gap-3">
+            {ACTIVITIES.map(([name, tint]) => (
+              <li key={name} className={`rounded-full px-6 py-3.5 font-heading text-[1.375rem] font-bold ${tint}`}>
+                {name}
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
-      {/* Extracurricular Activities */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">Extracurricular Activities</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Diverse opportunities for students to explore their interests and develop new skills
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {extracurriculars.map((activity, index) => {
-              const categoryColors = {
-                'Leadership': 'bg-red-100 text-red-800',
-                'Academic': 'bg-blue-100 text-blue-800',
-                'Communication': 'bg-green-100 text-green-800',
-                'STEM': 'bg-purple-100 text-purple-800',
-                'Creative': 'bg-pink-100 text-pink-800',
-                'Sports': 'bg-orange-100 text-orange-800',
-                'Strategy': 'bg-indigo-100 text-indigo-800',
-                'Service': 'bg-teal-100 text-teal-800'
-              };
-              
-              return (
-                <div key={index} className="bg-gray-50 p-4 rounded-lg hover:shadow-md transition-shadow">
-                  <h3 className="font-semibold text-gray-800 mb-2">{activity.name}</h3>
-                  <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${
-                    categoryColors[activity.category] || 'bg-gray-100 text-gray-800'
-                  }`}>
-                    {activity.category}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Assessment and Progress */}
-      <section className="py-16 bg-gray-100">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl font-bold text-gray-800 mb-6">Assessment & Progress Tracking</h2>
-              <div className="space-y-6">
-                <div className="flex items-start">
-                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold mr-4 mt-1">1</div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-800 mb-2">Continuous Assessment</h3>
-                    <p className="text-gray-600">Regular formative assessments help track student progress and identify areas for improvement.</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold mr-4 mt-1">2</div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-800 mb-2">Parent Communication</h3>
-                    <p className="text-gray-600">Regular progress reports and parent-teacher conferences keep families informed and engaged.</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold mr-4 mt-1">3</div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-800 mb-2">Individualized Support</h3>
-                    <p className="text-gray-600">Personalized learning plans ensure every student receives the support they need to succeed.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="relative">
-              <img 
-                src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=600&h=400&fit=crop" 
-                alt="Students working together" 
-                className="rounded-lg shadow-xl w-full h-96 object-cover"
-              />
-              <div className="absolute -bottom-6 -left-6 bg-blue-500 text-white p-6 rounded-lg shadow-lg">
-                <div className="text-2xl font-bold">98%</div>
-                <div className="text-sm">Student Success Rate</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="py-16 bg-blue-600 text-white">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Learn More?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Schedule a campus tour to see our academic programs in action and meet our dedicated faculty.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="/contact" 
-              className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
-            >
-              Schedule a Tour
-            </a>
-            <a 
-              href="/about" 
-              className="border-2 border-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
-            >
-              Meet Our Teachers
-            </a>
-          </div>
-        </div>
-      </section>
-    </div>
+      <CtaBand
+        title="See a lesson for yourself."
+        text="Visit during school hours and sit in on a class with your child."
+      >
+        <Action to="/contact" variant="zest">
+          Book a school visit
+        </Action>
+      </CtaBand>
+    </>
   );
 };
 

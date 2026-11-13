@@ -18,6 +18,12 @@ export const SCHOOL_LOGOS = {
   NEW_LEAF_LOGO: '/images/newleaf/new_leaf_logo.png',
   NEW_LEAF_LOGO_JPG: '/images/newleaf/new_leaf_logo.jpg',
   
+  // Crest only, cropped tight (header)
+  EMBLEM: '/images/newleaf/emblem.png',
+
+  // Human Care Foundation wordmark
+  HUMAN_CARE: '/images/newleaf/human_care.png',
+
   // Heavens School logo
   HEAVENS: '/images/newleaf/heavens.png',
   HEAVENS_JPG: '/images/newleaf/heavens.jpg',
